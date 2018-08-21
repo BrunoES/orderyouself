@@ -3,7 +3,7 @@ import { View, Text, Picker } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { Actions } from 'react-native-router-flux';
-import { categoriasFetch} from '../actions/AppActions'
+import { categoriasFetch, modificaCategoria } from '../actions/AppActions'
 import { getValuesFromObj } from '../utils/objutils';
 
 class Categorias extends Component {
@@ -27,7 +27,9 @@ class Categorias extends Component {
             <View>
                 <Text style={{ fontSize: 20, marginTop: 20, marginLeft: 12 }}>Categorias</Text>
                 <Picker
-                    style={{ height: 50, marginLeft: 12 }}>
+                    selectedValue={this.props.categoria}
+                    style={{ height: 50, marginLeft: 12 }}
+                    onValueChange={(value) => this.props.modificaCategoria(value)}>
                     {this._renderItems(this.props.categorias)}
                 </Picker>
             </View>
@@ -40,7 +42,8 @@ mapStateToProps = state => {
         let desc = getValuesFromObj(val).desc;
         return { desc, uid };
     });
-    return { categorias };
+    const categoria = state.AppReducer.categoria;
+    return { categorias, categoria };
 }
 
-export default connect(mapStateToProps, { categoriasFetch })(Categorias);
+export default connect(mapStateToProps, { categoriasFetch, modificaCategoria })(Categorias);

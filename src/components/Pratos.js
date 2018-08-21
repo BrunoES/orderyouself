@@ -3,7 +3,7 @@ import { View, Text, Picker } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { Actions } from 'react-native-router-flux';
-import { pratosFetch} from '../actions/AppActions'
+import { pratosFetch, modificaPrato } from '../actions/AppActions'
 import { getValuesFromObj } from '../utils/objutils';
 
 class Pratos extends Component {
@@ -27,7 +27,9 @@ class Pratos extends Component {
             <View>
                 <Text style={{ fontSize: 20, marginTop: 20, marginLeft: 12 }}>Pratos</Text>
                 <Picker
-                    style={{ height: 50, marginLeft: 12 }}>
+                    selectedValue={this.props.prato}
+                    style={{ height: 50, marginLeft: 12 }}
+                    onValueChange={(value) => this.props.modificaPrato(value)}>
                     {this._renderItems(this.props.pratos)}
                 </Picker>
             </View>
@@ -40,7 +42,8 @@ mapStateToProps = state => {
         let desc = getValuesFromObj(getValuesFromObj(val)).desc;
         return { desc, uid };
     });
-    return { pratos };
+    const prato = state.AppReducer.prato;
+    return { pratos, prato };
 }
 
-export default connect(mapStateToProps, { pratosFetch })(Pratos);
+export default connect(mapStateToProps, { pratosFetch, modificaPrato })(Pratos);
