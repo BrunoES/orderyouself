@@ -16,7 +16,6 @@ class Categorias extends Component {
         const pickerItems = _.map(categorias, (val, uid) => {
             let id = _.values(val)[1];
             let desc = _.values(val)[0];
-            console
             return <Picker.Item key={id} value={id} label={desc} />;
         });
         return pickerItems;
@@ -27,9 +26,10 @@ class Categorias extends Component {
             <View>
                 <Text style={{ fontSize: 20, marginTop: 20, marginLeft: 12 }}>Categorias</Text>
                 <Picker
-                    selectedValue={this.props.categoria}
+                    selectedValue={this.props.categoria.id}
                     style={{ height: 50, marginLeft: 12 }}
                     onValueChange={(value) => this.props.modificaCategoria(value)}>
+                    <Picker.Item label="Selecione uma categoria" value="0" />
                     {this._renderItems(this.props.categorias)}
                 </Picker>
             </View>
@@ -39,7 +39,7 @@ class Categorias extends Component {
 
 mapStateToProps = state => {
     const categorias = _.map(state.ListaCategoriasReducer, (val, uid) => {
-        let desc = getValuesFromObj(val).desc;
+        let desc = val.desc;
         return { desc, uid };
     });
     const categoria = state.AppReducer.categoria;

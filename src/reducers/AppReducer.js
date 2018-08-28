@@ -1,11 +1,27 @@
 import { 
     MODIFICA_CATEGORIA,
-    MODIFICA_PRATO
+    MODIFICA_PRATO,
+    ADICIONA_REFEICAO
  } from '../actions/types';
+import { Actions } from 'react-native-router-flux';
 
 const INITIAL_STATE = {
-    categoria: '',
-    prato: ''
+    categoria: {
+        id: '',
+        descricao: ''
+    },
+    prato: {
+        id: '',
+        descricao: ''
+    },
+    refeicoes: [{
+        key: '0',
+        categoria: '',
+        prato: '',
+        desc: 'Selecione sua refeição',
+        quantidade: 0
+
+    }]
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -14,6 +30,9 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, categoria: action.payload };
         case MODIFICA_PRATO:
             return { ...state, prato: action.payload };
+        case ADICIONA_REFEICAO:
+        INITIAL_STATE.refeicoes.push(action.payload);
+            return { ...state, refeicoes: INITIAL_STATE.refeicoes };
         default:
             return state;
     }

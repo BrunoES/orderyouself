@@ -9,14 +9,13 @@ import { getValuesFromObj } from '../utils/objutils';
 class Pratos extends Component {
     
     componentWillMount() {
-       this.props.pratosFetch();
+       this.props.pratosFetch(this.props.categoria.id);
     }
 
     _renderItems(pratos) {
         const pickerItems = _.map(pratos, (val, uid) => {
             let id = _.values(val)[1];
             let desc = _.values(val)[0];
-            console
             return <Picker.Item key={id} value={id} label={desc} />;
         });
         return pickerItems;
@@ -27,9 +26,10 @@ class Pratos extends Component {
             <View>
                 <Text style={{ fontSize: 20, marginTop: 20, marginLeft: 12 }}>Pratos</Text>
                 <Picker
-                    selectedValue={this.props.prato}
+                    selectedValue={this.props.prato.id}
                     style={{ height: 50, marginLeft: 12 }}
                     onValueChange={(value) => this.props.modificaPrato(value)}>
+                    <Picker.Item label="Selecione um prato" value="0" />
                     {this._renderItems(this.props.pratos)}
                 </Picker>
             </View>
@@ -39,11 +39,13 @@ class Pratos extends Component {
 
 mapStateToProps = state => {
     const pratos = _.map(state.ListaPratosReducer, (val, uid) => {
-        let desc = getValuesFromObj(getValuesFromObj(val)).desc;
+        let desc = val.desc;
         return { desc, uid };
     });
+    const categoria = state.AppReducer.categoria;
     const prato = state.AppReducer.prato;
-    return { pratos, prato };
+
+    return { pratos, prato, categoria };
 }
 
 export default connect(mapStateToProps, { pratosFetch, modificaPrato })(Pratos);
