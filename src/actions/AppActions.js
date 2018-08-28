@@ -10,8 +10,9 @@ import _ from 'lodash';
 import firebase from 'firebase';
 
 export const categoriasFetch = () => {
+    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
     return dispatch => {
-        firebase.database().ref("/categorias/6abe636d-f47a-415e-9493-ac89db41361f/")
+        firebase.database().ref(`/categorias/${usuarioLogado}/`)
             .on("value", snapshot => {
                 dispatch({ type: LISTA_CATEGORIAS, payload: snapshot.val() });
             })
@@ -19,22 +20,24 @@ export const categoriasFetch = () => {
 }
 
 export const pratosFetch = (idCategoria) => {
+    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
     return dispatch => {
-        firebase.database().ref(`/pratos/6abe636d-f47a-415e-9493-ac89db41361f/${idCategoria}/`)
+        firebase.database().ref(`/pratos/${usuarioLogado}/${idCategoria}/`)
             .on("value", snapshot => {
                 dispatch({ type: LISTA_PRATOS, payload: snapshot.val() });
             })
     }
 }
 
-export const modificaCategoria = itemValue => {
+export const modificaCategoria = idCategoria => {
+    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
     return dispatch => {
-        firebase.database().ref(`/categorias/6abe636d-f47a-415e-9493-ac89db41361f/${itemValue}/`)
+        firebase.database().ref(`/categorias/${usuarioLogado}/${idCategoria}/`)
             .on("value", snapshot => {
                 dispatch({
                     type: MODIFICA_CATEGORIA,
                     payload: {
-                         id: itemValue,
+                         id: idCategoria,
                          descricao: _.values(snapshot.val())[0]
                     }
                  });
@@ -42,14 +45,15 @@ export const modificaCategoria = itemValue => {
     }
 }
 
-export const modificaPrato = itemValue => {
+export const modificaPrato = (idPrato, idCategoria) => {
+    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
     return dispatch => {
-        firebase.database().ref(`/pratos/6abe636d-f47a-415e-9493-ac89db41361f/0e935802-b991-4cab-8474-9727f8c4bcc0/${itemValue}/`)
+        firebase.database().ref(`/pratos/${usuarioLogado}/${idCategoria}/${idPrato}/`)
             .on("value", snapshot => {
                 dispatch({
                     type: MODIFICA_PRATO,
                     payload: {
-                         id: itemValue,
+                         id: idPrato,
                          descricao: _.values(snapshot.val())[0]
                     }
                  });

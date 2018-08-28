@@ -12,6 +12,12 @@ class Pratos extends Component {
        this.props.pratosFetch(this.props.categoria.id);
     }
 
+    componentWillReceiveProps(nextProps) {
+        if(this.props.categoria.id != nextProps.categoria.id){
+            this.props.pratosFetch(nextProps.categoria.id);
+        }
+    }
+
     _renderItems(pratos) {
         const pickerItems = _.map(pratos, (val, uid) => {
             let id = _.values(val)[1];
@@ -28,7 +34,7 @@ class Pratos extends Component {
                 <Picker
                     selectedValue={this.props.prato.id}
                     style={{ height: 50, marginLeft: 12 }}
-                    onValueChange={(value) => this.props.modificaPrato(value)}>
+                    onValueChange={(value) => this.props.modificaPrato(value, this.props.categoria.id)}>
                     <Picker.Item label="Selecione um prato" value="0" />
                     {this._renderItems(this.props.pratos)}
                 </Picker>
@@ -44,6 +50,8 @@ mapStateToProps = state => {
     });
     const categoria = state.AppReducer.categoria;
     const prato = state.AppReducer.prato;
+
+    console.log(categoria);
 
     return { pratos, prato, categoria };
 }
