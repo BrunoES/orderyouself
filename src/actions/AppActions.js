@@ -3,7 +3,8 @@ import {
     LISTA_PRATOS,
     MODIFICA_CATEGORIA,
     MODIFICA_PRATO,
-    ADICIONA_REFEICAO
+    ADICIONA_REFEICAO,
+    LISTA_REFEICOES
 } from './types';
 
 import _ from 'lodash';
@@ -62,8 +63,27 @@ export const modificaPrato = (idPrato, idCategoria) => {
 }
 
 export const adicionaRefeicao = refeicao => {
-    return ({
-        type: ADICIONA_REFEICAO,
-        payload: refeicao
-    });
+    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+    return dispatch => {
+        firebase.database().ref(`/refeicoes/${usuarioLogado}/`)
+            .push(refeicao)
+            .then(() => dispatch({
+                type: ADICIONA_REFEICAO,
+                payload: refeicao
+            }))
+            .catch((erro) => dispatch({
+                type: ADICIONA_REFEICAO,
+                payload: ''
+            }))
+    };
+}
+
+export const refeicoesFetch = () => {
+    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+    return dispatch => {
+        firebase.database().ref(`/refeicoes/${usuarioLogado}/`)
+            .on("value", snapshot => {
+                dispatch({ type: LISTA_REFEICOES, payload: snapshot.val() });
+            })
+    };
 }

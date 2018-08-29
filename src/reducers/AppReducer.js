@@ -16,7 +16,9 @@ const INITIAL_STATE = {
     },
     refeicoes: [{
         key: '0',
+        categoriaId: '',
         categoria: '',
+        pratoId: '',
         prato: '',
         desc: 'Selecione sua refeição',
         quantidade: 0
@@ -31,7 +33,7 @@ export default (state = INITIAL_STATE, action) => {
         case MODIFICA_PRATO:
             return { ...state, prato: action.payload };
         case ADICIONA_REFEICAO:
-        INITIAL_STATE.refeicoes.push(action.payload);
+            INITIAL_STATE.refeicoes.push(action.payload);
             return { ...state, refeicoes: INITIAL_STATE.refeicoes };
         default:
             return state;

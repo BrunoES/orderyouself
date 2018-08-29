@@ -9,7 +9,9 @@ import { getValuesFromObj } from '../utils/objutils';
 class Pratos extends Component {
     
     componentWillMount() {
-       this.props.pratosFetch(this.props.categoria.id);
+        if(this.props.categoria.id != ''){
+            this.props.pratosFetch(this.props.categoria.id);
+        }
     }
 
     componentWillReceiveProps(nextProps) {
@@ -50,8 +52,6 @@ mapStateToProps = state => {
     });
     const categoria = state.AppReducer.categoria;
     const prato = state.AppReducer.prato;
-
-    console.log(categoria);
 
     return { pratos, prato, categoria };
 }
