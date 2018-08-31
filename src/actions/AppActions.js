@@ -3,6 +3,7 @@ import {
     LISTA_PRATOS,
     MODIFICA_CATEGORIA,
     MODIFICA_PRATO,
+    MODIFICA_QUANTIDADE,
     ADICIONA_REFEICAO,
     LISTA_REFEICOES,
     REMOVE_REFEICAO
@@ -45,6 +46,13 @@ export const modificaCategoria = idCategoria => {
                  });
             })
     }
+}
+
+export const modificaQuantidade = (quantidade) => {
+    return {
+        type: MODIFICA_QUANTIDADE,
+        payload: quantidade
+    };
 }
 
 export const modificaPrato = (idPrato, idCategoria) => {

@@ -1,6 +1,7 @@
 import { 
     MODIFICA_CATEGORIA,
     MODIFICA_PRATO,
+    MODIFICA_QUANTIDADE,
     ADICIONA_REFEICAO,
     REMOVE_REFEICAO
  } from '../actions/types';
@@ -34,6 +35,8 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, categoria: action.payload };
         case MODIFICA_PRATO:
             return { ...state, prato: action.payload };
+        case MODIFICA_QUANTIDADE:
+            return { ...state, quantidade: action.payload };
         case REMOVE_REFEICAO:
             return { ...state, prato: action.payload };
         case ADICIONA_REFEICAO:

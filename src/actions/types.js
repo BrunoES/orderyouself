@@ -5,3 +5,4 @@ export const MODIFICA_PRATO = 'modifica_prato';
 export const ADICIONA_REFEICAO = 'adiciona_refeicao';
 export const LISTA_REFEICOES = 'lista_refeicoes';
 export const REMOVE_REFEICAO = 'remove_refeicao';
+export const MODIFICA_QUANTIDADE = 'modifica_quantidade';

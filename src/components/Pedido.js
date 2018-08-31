@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, ListView, Button, TouchableOpacity, TouchableHighlight } from 'react-native';
+import { View, Text, ListView, Button, TextInput, TouchableOpacity, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { Actions } from 'react-native-router-flux';
-import { adicionaRefeicao, removeRefeicao, refeicoesFetch } from '../actions/AppActions'
+import { modificaQuantidade, adicionaRefeicao, removeRefeicao, refeicoesFetch } from '../actions/AppActions'
 import Categorias from './Categorias';
 import Pratos from './Pratos';
 
@@ -54,7 +54,7 @@ class Pedido extends Component {
             pratoId: this.props.prato.id,
             prato: this.props.prato.descricao,
             desc: this.props.prato.descricao,
-            quantidade: 1
+            quantidade: this.props.quantidade
         });
     }
 
@@ -78,6 +78,11 @@ class Pedido extends Component {
                 <View>
                     <Categorias />
                     <Pratos />
+                    <TextInput
+                        value={this.props.quantidade}
+                        onChangeText={text => this.props.modificaQuantidade(text) }
+                        placeholder={"Quantidade"}
+                    />
                     <Button
                         onPress={() => this._adicionaRefeicao()}
                         title="Adicionar"
@@ -102,12 +107,13 @@ class Pedido extends Component {
 mapStateToProps = state => {
     const categoria = state.AppReducer.categoria;
     const prato = state.AppReducer.prato;
+    const quantidade = state.AppReducer.quantidade;
     
     const refeicoes = _.map(state.ListaRefeicoesReducer, (val, uid) => {
         return { ...val, uid }
     });
-    
-    return { refeicoes, categoria, prato };
+
+    return { refeicoes, categoria, prato, quantidade };
 }
 
-export default connect(mapStateToProps, { adicionaRefeicao, removeRefeicao, refeicoesFetch })(Pedido);
+export default connect(mapStateToProps, { modificaQuantidade, adicionaRefeicao, removeRefeicao, refeicoesFetch })(Pedido);
