@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, ListView, Button, TouchableOpacity } from 'react-native';
+import { View, Text, ListView, Button, TouchableOpacity, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { Actions } from 'react-native-router-flux';
-import { adicionaRefeicao, refeicoesFetch } from '../actions/AppActions'
+import { adicionaRefeicao, removeRefeicao, refeicoesFetch } from '../actions/AppActions'
 import Categorias from './Categorias';
 import Pratos from './Pratos';
 
@@ -23,6 +23,11 @@ class MyListItem extends Component {
   }
 
 class Pedido extends Component {
+
+    constructor(props){
+        super(props);
+        this._renderRow = this._renderRow.bind(this);
+    }
 
     componentWillMount() {
         this.props.refeicoesFetch();
@@ -53,9 +58,17 @@ class Pedido extends Component {
         });
     }
 
-    renderRow(item) {
+    _removeRefeicao(refeicaoId) {
+        this.props.removeRefeicao(refeicaoId);
+    }
+
+    _renderRow(item) {
         return (
-            <Text>{item.desc}</Text>
+            <View>
+                <TouchableHighlight onPress={ () => this._removeRefeicao(item.uid) }>
+                    <Text>{item.desc}</Text>
+                </TouchableHighlight>
+            </View>
         );
     }
 
@@ -77,7 +90,7 @@ class Pedido extends Component {
                     <ListView 
                      enableEmptySections
                      dataSource={this.dataSource}
-                     renderRow={(rowData) => <Text>{rowData.desc}</Text>}
+                     renderRow={this._renderRow}
                     />   
 
                 </View>
@@ -87,14 +100,14 @@ class Pedido extends Component {
 }
 
 mapStateToProps = state => {
-    //const refeicoes = state.AppReducer.refeicoes;
     const categoria = state.AppReducer.categoria;
     const prato = state.AppReducer.prato;
-    const refeicoes = _.values(state.ListaRefeicoesReducer);
-    /*
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    const dataSource = ds.cloneWithRows(refeicoes);*/
+    
+    const refeicoes = _.map(state.ListaRefeicoesReducer, (val, uid) => {
+        return { ...val, uid }
+    });
+    
     return { refeicoes, categoria, prato };
 }
 
-export default connect(mapStateToProps, { adicionaRefeicao, refeicoesFetch })(Pedido);
+export default connect(mapStateToProps, { adicionaRefeicao, removeRefeicao, refeicoesFetch })(Pedido);

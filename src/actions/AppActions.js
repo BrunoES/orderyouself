@@ -4,7 +4,8 @@ import {
     MODIFICA_CATEGORIA,
     MODIFICA_PRATO,
     ADICIONA_REFEICAO,
-    LISTA_REFEICOES
+    LISTA_REFEICOES,
+    REMOVE_REFEICAO
 } from './types';
 
 import _ from 'lodash';
@@ -73,6 +74,22 @@ export const adicionaRefeicao = refeicao => {
             }))
             .catch((erro) => dispatch({
                 type: ADICIONA_REFEICAO,
+                payload: ''
+            }))
+    };
+}
+
+export const removeRefeicao = refeicaoId => {
+    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+    return dispatch => {
+        firebase.database().ref(`/refeicoes/${usuarioLogado}/${refeicaoId}`)
+            .remove()
+            .then(() => dispatch({
+                type: REMOVE_REFEICAO,
+                payload: refeicao
+            }))
+            .catch((erro) => dispatch({
+                type: REMOVE_REFEICAO,
                 payload: ''
             }))
     };
