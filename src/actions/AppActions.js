@@ -3,14 +3,128 @@ import {
     LISTA_PRATOS,
     MODIFICA_CATEGORIA,
     MODIFICA_PRATO,
-    MODIFICA_QUANTIDADE,
     ADICIONA_REFEICAO,
     LISTA_REFEICOES,
-    REMOVE_REFEICAO
+    REMOVE_REFEICAO,
+    MODIFICA_QUANTIDADE,
+    LISTA_CATEGORIASBEBIDAS,
+    LISTA_BEBIDAS,
+    MODIFICA_CATEGORIABEBIDAS,
+    MODIFICA_BEBIDA,
+    ADICIONA_BEBIDA,
+    LISTA_BEBIDASPEDIDO,
+    REMOVE_BEBIDA,
+    MODIFICA_QUANTIDADEBEBIDA
 } from './types';
 
 import _ from 'lodash';
 import firebase from 'firebase';
+
+export const categoriasBebidasFetch = () => {
+    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+    return dispatch => {
+        firebase.database().ref(`/categoriasBebidas/${usuarioLogado}/`)
+            .on("value", snapshot => {
+                dispatch({ type: LISTA_CATEGORIASBEBIDAS, payload: snapshot.val() });
+            })
+    }
+}
+
+export const bebidasFetch = (bebidasCategoriaId) => {
+    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+    return dispatch => {
+        firebase.database().ref(`/bebidas/${usuarioLogado}/${bebidasCategoriaId}/`)
+            .on("value", snapshot => {
+                dispatch({ type: LISTA_BEBIDAS, payload: snapshot.val() });
+            })
+    }
+}
+
+export const modificaCategoriaBebidas = bebidasCategoriaId => {
+    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+    return dispatch => {
+        firebase.database().ref(`/categoriasBebidas/${usuarioLogado}/${bebidasCategoriaId}/`)
+            .on("value", snapshot => {
+                dispatch({
+                    type: MODIFICA_CATEGORIABEBIDAS,
+                    payload: {
+                         id: bebidasCategoriaId,
+                         descricao: _.values(snapshot.val())[0]
+                    }
+                 });
+            })
+    }
+}
+
+export const modificaQuantidadeBebida = (quantidade) => {
+    return {
+        type: MODIFICA_QUANTIDADEBEBIDA,
+        payload: quantidade
+    };
+}
+
+export const modificaBebida = (bebidaId, bebidasCategoriaId) => {
+    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+    return dispatch => {
+        firebase.database().ref(`/bebidas/${usuarioLogado}/${bebidasCategoriaId}/${bebidaId}/`)
+            .on("value", snapshot => {
+                dispatch({
+                    type: MODIFICA_BEBIDA,
+                    payload: {
+                         id: bebidaId,
+                         descricao: _.values(snapshot.val())[0]
+                    }
+                 });
+            })
+    }
+}
+
+export const adicionaBebida = bebidaPedido => {
+    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+    return dispatch => {
+        firebase.database().ref(`/bebidaspedido/${usuarioLogado}/`)
+            .push(bebidaPedido)
+            .then(() => dispatch({
+                type: ADICIONA_BEBIDA,
+                payload: bebidaPedido
+            }))
+            .catch((erro) => dispatch({
+                type: ADICIONA_BEBIDA,
+                payload: ''
+            }))
+    };
+}
+
+export const removeBebida = bebidaId => {
+    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+    return dispatch => {
+        firebase.database().ref(`/bebidaspedido/${usuarioLogado}/${bebidaId}`)
+            .remove()
+            .then(() => dispatch({
+                type: REMOVE_BEBIDA,
+                payload: refeicao
+            }))
+            .catch((erro) => dispatch({
+                type: REMOVE_BEBIDA,
+                payload: ''
+            }))
+    };
+}
+
+export const bebidasPedidoFetch = () => {
+    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+    return dispatch => {
+        firebase.database().ref(`/bebidaspedido/${usuarioLogado}/`)
+            .on("value", snapshot => {
+                dispatch({ type: LISTA_BEBIDASPEDIDO, payload: snapshot.val() });
+            })
+    };
+}
+
+
+
+/* --------------------------------------------------------------------------------------------------- */
+
 
 export const categoriasFetch = () => {
     let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";

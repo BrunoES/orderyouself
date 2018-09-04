@@ -22,7 +22,7 @@ class MyListItem extends Component {
     }
   }
 
-class Pedido extends Component {
+class PratoPrincipal extends Component {
 
     constructor(props){
         super(props);
@@ -91,13 +91,11 @@ class Pedido extends Component {
                     />
                 </View>
                 <View>
-                    
                     <ListView 
                      enableEmptySections
                      dataSource={this.dataSource}
                      renderRow={this._renderRow}
                     />   
-
                 </View>
             </View>
         );
@@ -116,4 +114,4 @@ mapStateToProps = state => {
     return { refeicoes, categoria, prato, quantidade };
 }
 
-export default connect(mapStateToProps, { modificaQuantidade, adicionaRefeicao, removeRefeicao, refeicoesFetch })(Pedido);
+export default connect(mapStateToProps, { modificaQuantidade, adicionaRefeicao, removeRefeicao, refeicoesFetch })(PratoPrincipal);
