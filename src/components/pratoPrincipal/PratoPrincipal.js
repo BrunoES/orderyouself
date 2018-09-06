@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, ListView, Button, TextInput, TouchableOpacity, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { Actions } from 'react-native-router-flux';
-import { modificaQuantidade, adicionaRefeicao, removeRefeicao, refeicoesFetch } from '../actions/AppActions'
+import { modificaQuantidade, adicionaRefeicao, removeRefeicao, refeicoesFetch } from '../../actions/AppActions'
 import Categorias from './Categorias';
 import Pratos from './Pratos';
 

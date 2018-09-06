@@ -15,3 +15,12 @@ export const ADICIONA_BEBIDA = 'adiciona_bebida';
 export const LISTA_BEBIDASPEDIDO = 'lista_bebidaspedido';
 export const REMOVE_BEBIDA = 'remove_bebida';
 export const MODIFICA_QUANTIDADEBEBIDA = 'modifica_quantidadebebida';
+
+export const LISTA_CATEGORIASACOMPANHAMENTOS = 'lista_categoriasacompanhamentos';
+export const LISTA_ACOMPANHAMENTOS = 'lista_acompanhamentos';
+export const MODIFICA_CATEGORIAACOMPANHAMENTOS = 'modifica_categoriaacompanhamentos';
+export const MODIFICA_ACOMPANHAMENTO = 'modifica_acompanhamento';
+export const ADICIONA_ACOMPANHAMENTO = 'adiciona_acompanhamento';
+export const LISTA_ACOMPANHAMENTOSPEDIDO = 'lista_bebidasacompanhamento';
+export const REMOVE_ACOMPANHAMENTO = 'remove_acompanhamento';
+export const MODIFICA_QUANTIDADEACOMPANHAMENTO = 'modifica_quantidadeacompanhamento';

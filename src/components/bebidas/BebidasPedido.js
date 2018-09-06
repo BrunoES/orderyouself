@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, ListView, Button, TextInput, TouchableOpacity, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { Actions } from 'react-native-router-flux';
-import { modificaQuantidadeBebida, adicionaBebida, removeBebida, bebidasPedidoFetch } from '../actions/AppActions'
+import { modificaQuantidadeBebida, adicionaBebida, removeBebida, bebidasPedidoFetch } from '../../actions/AppActions'
 import CategoriaBebidas from './CategoriaBebidas';
 import Bebidas from './Bebidas';
 
@@ -84,8 +83,7 @@ class BebidasPedido extends Component {
                         placeholder={"Quantidade"}
                     />
                     <Button
-                        //onPress={() => this._adicionaBebida()}
-                        onPress={ () => Actions.pratoprincipal() }
+                        onPress={() => this._adicionaBebida()}
                         title="Adicionar"
                         color="#841584"
                         accessibilityLabel="Adicione uma bebida ao seu pedido."

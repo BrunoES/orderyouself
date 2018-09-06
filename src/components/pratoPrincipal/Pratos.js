@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Picker } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { Actions } from 'react-native-router-flux';
-import { pratosFetch, modificaPrato } from '../actions/AppActions'
-import { getValuesFromObj } from '../utils/objutils';
+import { pratosFetch, modificaPrato } from '../../actions/AppActions'
 
 class Pratos extends Component {
     

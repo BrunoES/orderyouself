@@ -3,12 +3,17 @@ import {
     MODIFICA_PRATO,
     MODIFICA_QUANTIDADE,
     REMOVE_REFEICAO,
+
     MODIFICA_CATEGORIABEBIDAS,
     MODIFICA_BEBIDA,
     MODIFICA_QUANTIDADEBEBIDA,
-    REMOVE_BEBIDA
+    REMOVE_BEBIDA,
+
+    MODIFICA_CATEGORIAACOMPANHAMENTOS,
+    MODIFICA_ACOMPANHAMENTO,
+    MODIFICA_QUANTIDADEACOMPANHAMENTO,
+    REMOVE_ACOMPANHAMENTO
  } from '../actions/types';
-import { Actions } from 'react-native-router-flux';
 
 const INITIAL_STATE = {
     categoria: {
@@ -27,20 +32,21 @@ const INITIAL_STATE = {
         id: '',
         descricao: ''
     },
+    categoriaAcompanhamentos: {
+        id: '',
+        descricao: ''
+    },
+    acompanhamento: {
+        id: '',
+        descricao: ''
+    },
     quantidade: '',
-    quantidadeBebida: ''
+    quantidadeBebida: '',
+    quantidadeAcompanhamento: ''
 }
 
 export default (state = INITIAL_STATE, action) => {
     switch(action.type){
-        case MODIFICA_CATEGORIABEBIDAS:
-            return { ...state, categoriaBebidas: action.payload };
-        case MODIFICA_BEBIDA:
-            return { ...state, bebida: action.payload };
-        case MODIFICA_QUANTIDADEBEBIDA:
-            return { ...state, quantidadeBebida: action.payload };
-        case REMOVE_BEBIDA:
-            return { ...state, prato: action.payload };
 
         case MODIFICA_CATEGORIA:
             return { ...state, categoria: action.payload };
@@ -51,6 +57,23 @@ export default (state = INITIAL_STATE, action) => {
         case REMOVE_REFEICAO:
             return { ...state, prato: action.payload };
         
+        case MODIFICA_CATEGORIABEBIDAS:
+            return { ...state, categoriaBebidas: action.payload };
+        case MODIFICA_BEBIDA:
+            return { ...state, bebida: action.payload };
+        case MODIFICA_QUANTIDADEBEBIDA:
+            return { ...state, quantidadeBebida: action.payload };
+        case REMOVE_BEBIDA:
+            return { ...state, bebida: action.payload };
+
+        case MODIFICA_CATEGORIAACOMPANHAMENTOS:
+            return { ...state, categoriaAcompanhamentos: action.payload };
+        case MODIFICA_ACOMPANHAMENTO:
+            return { ...state, acompanhamento: action.payload };
+        case MODIFICA_QUANTIDADEACOMPANHAMENTO:
+            return { ...state, quantidadeAcompanhamento: action.payload };
+        case REMOVE_ACOMPANHAMENTO:
+            return { ...state, acompanhamento: action.payload };
 
         default:
             return state;

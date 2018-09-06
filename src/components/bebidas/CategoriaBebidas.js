@@ -2,18 +2,16 @@ import React, { Component } from 'react';
 import { View, Text, Picker } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { Actions } from 'react-native-router-flux';
-import { categoriasFetch, modificaCategoria } from '../actions/AppActions'
-import { getValuesFromObj } from '../utils/objutils';
+import { categoriasBebidasFetch, modificaCategoriaBebidas } from '../../actions/AppActions'
 
-class Categorias extends Component {
+class CategoriaBebidas extends Component {
     
     componentWillMount() {
-       this.props.categoriasFetch();
+       this.props.categoriasBebidasFetch();
     }
 
-    _renderItems(categorias) {
-        const pickerItems = _.map(categorias, (val, uid) => {
+    _renderItems(categoriasBebidas) {
+        const pickerItems = _.map(categoriasBebidas, (val, uid) => {
             let id = _.values(val)[1];
             let desc = _.values(val)[0];
             return <Picker.Item key={id} value={id} label={desc} />;
@@ -26,11 +24,11 @@ class Categorias extends Component {
             <View>
                 <Text style={{ fontSize: 20, marginTop: 20, marginLeft: 12 }}>Categorias</Text>
                 <Picker
-                    selectedValue={this.props.categoria.id}
+                    selectedValue={this.props.categoriaBebidas.id}
                     style={{ height: 50, marginLeft: 12 }}
-                    onValueChange={(value) => this.props.modificaCategoria(value)}>
+                    onValueChange={(value) => this.props.modificaCategoriaBebidas(value)}>
                     <Picker.Item label="Selecione uma categoria" value="0" />
-                    {this._renderItems(this.props.categorias)}
+                    {this._renderItems(this.props.categoriasBebidas)}
                 </Picker>
             </View>
         );
@@ -38,12 +36,12 @@ class Categorias extends Component {
 }
 
 mapStateToProps = state => {
-    const categorias = _.map(state.ListaCategoriasReducer, (val, uid) => {
+    const categoriasBebidas = _.map(state.ListaCategoriasBebidasReducer, (val, uid) => {
         let desc = val.desc;
         return { desc, uid };
     });
-    const categoria = state.AppReducer.categoria;
-    return { categorias, categoria };
+    const categoriaBebidas = state.AppReducer.categoriaBebidas;
+    return { categoriasBebidas, categoriaBebidas };
 }
 
-export default connect(mapStateToProps, { categoriasFetch, modificaCategoria })(Categorias);
+export default connect(mapStateToProps, { categoriasBebidasFetch, modificaCategoriaBebidas })(CategoriaBebidas);

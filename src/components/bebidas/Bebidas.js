@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Picker } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { bebidasFetch, modificaBebida } from '../actions/AppActions'
+import { bebidasFetch, modificaBebida } from '../../actions/AppActions'
 
 class Bebidas extends Component {
     
