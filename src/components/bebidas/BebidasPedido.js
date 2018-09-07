@@ -1,25 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text, ListView, Button, TextInput, TouchableOpacity, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
-import _ from 'lodash';
+
 import { modificaQuantidadeBebida, adicionaBebida, removeBebida, bebidasPedidoFetch } from '../../actions/AppActions'
 import CategoriaBebidas from './CategoriaBebidas';
 import Bebidas from './Bebidas';
+import MyListItem from './../MyListItem';
 
-class MyListItem extends Component {
-    render() {
-      const textColor = "red";
-      return (
-        <TouchableOpacity>
-          <View>
-            <Text style={{ color: textColor }}>
-              {this.props.title}
-            </Text>
-          </View>
-        </TouchableOpacity>
-      );
-    }
-  }
+import _ from 'lodash';
 
 class BebidasPedido extends Component {
 
@@ -65,7 +53,7 @@ class BebidasPedido extends Component {
         return (
             <View>
                 <TouchableHighlight onPress={ () => this._removeBebida(item.uid) }>
-                    <Text>{item.desc}</Text>
+                    <MyListItem desc={item.desc} quantidade={item.quantidadeBebida} />
                 </TouchableHighlight>
             </View>
         );

@@ -13,9 +13,9 @@ import AcompanhamentosPedido from './components/acompanhamentos/AcompanhamentosP
 export default props => (
     <Router navigationBarStyle={{ backgroundColor: '#115E54'}} titleStyle={{ color: '#fff' }} >
         <Scene key="root">
-            <Scene key='formLogin' component={FormLogin} title="Login" initial />
+            <Scene key='formLogin' component={FormLogin} title="Login" />
             <Scene key='formCadastro' component={FormCadastro} title="Cadastro" />
-            <Scene key='pratoPrincipal' component={PratoPrincipal} title="Prato Principal" />
+            <Scene key='pratoPrincipal' component={PratoPrincipal} title="Prato Principal" initial />
             <Scene key='bebidasPedido' component={BebidasPedido} title="Bebidas Pedido"  />
             <Scene key='acompanhamentosPedido' component={AcompanhamentosPedido} title="Acompanhamentos" />
             <Scene key='menu' component={Menu} title="Menu" />

@@ -1,26 +1,14 @@
 import React, { Component } from 'react';
 import { View, Text, ListView, Button, TextInput, TouchableOpacity, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
-import _ from 'lodash';
+import { Actions } from 'react-native-router-flux';
+
 import { modificaQuantidadeAcompanhamento, adicionaAcompanhamento, removeAcompanhamento, acompanhamentosPedidoFetch } from '../../actions/AppActions'
 import CategoriaAcompanhamentos from './CategoriaAcompanhamentos';
 import Acompanhamentos from './Acompanhamentos';
-import { Actions } from 'react-native-router-flux';
+import MyListItem from './../MyListItem';
 
-class MyListItem extends Component {
-    render() {
-      const textColor = "red";
-      return (
-        <TouchableOpacity>
-          <View>
-            <Text style={{ color: textColor }}>
-              {this.props.title}
-            </Text>
-          </View>
-        </TouchableOpacity>
-      );
-    }
-  }
+import _ from 'lodash';
 
 class AcompanhamentosPedido extends Component {
 
@@ -66,7 +54,7 @@ class AcompanhamentosPedido extends Component {
         return (
             <View>
                 <TouchableHighlight onPress={ () => this._removeAcompanhamento(item.uid) }>
-                    <Text>{item.desc}</Text>
+                    <MyListItem desc={item.desc} quantidade={item.quantidadeAcompanhamento} />
                 </TouchableHighlight>
             </View>
         );

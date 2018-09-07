@@ -1,26 +1,14 @@
 import React, { Component } from 'react';
 import { View, Text, ListView, Button, TextInput, TouchableOpacity, TouchableHighlight } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import _ from 'lodash';
+
 import { modificaQuantidade, adicionaRefeicao, removeRefeicao, refeicoesFetch } from '../../actions/AppActions'
 import Categorias from './Categorias';
 import Pratos from './Pratos';
-import { Actions } from 'react-native-router-flux';
+import MyListItem from './../MyListItem';
 
-class MyListItem extends Component {
-    render() {
-      const textColor = "red";
-      return (
-        <TouchableOpacity>
-          <View>
-            <Text style={{ color: textColor }}>
-              {this.props.title}
-            </Text>
-          </View>
-        </TouchableOpacity>
-      );
-    }
-  }
+import _ from 'lodash';
 
 class PratoPrincipal extends Component {
 
@@ -66,7 +54,7 @@ class PratoPrincipal extends Component {
         return (
             <View>
                 <TouchableHighlight onPress={ () => this._removeRefeicao(item.uid) }>
-                    <Text>{item.desc}</Text>
+                    <MyListItem desc={item.desc} quantidade={item.quantidade} />
                 </TouchableHighlight>
             </View>
         );
