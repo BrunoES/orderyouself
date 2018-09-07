@@ -5,6 +5,7 @@ import _ from 'lodash';
 import { modificaQuantidadeAcompanhamento, adicionaAcompanhamento, removeAcompanhamento, acompanhamentosPedidoFetch } from '../../actions/AppActions'
 import CategoriaAcompanhamentos from './CategoriaAcompanhamentos';
 import Acompanhamentos from './Acompanhamentos';
+import { Actions } from 'react-native-router-flux';
 
 class MyListItem extends Component {
     render() {
@@ -87,6 +88,12 @@ class AcompanhamentosPedido extends Component {
                         title="Adicionar"
                         color="#841584"
                         accessibilityLabel="Adicione uma acompanhamento ao seu pedido."
+                    />
+                    <Button
+                        onPress={ () => Actions.bebidasPedido() }
+                        title="Avançar"
+                        color="#841584"
+                        accessibilityLabel="Avançe para a tela de acompanhamentos."
                     />
                 </View>
                 <View>

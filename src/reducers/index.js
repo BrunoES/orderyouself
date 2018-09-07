@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import AppReducer from './AppReducer';
+import AutenticacaoReducer from './AutenticacaoReducer';
 
 import ListaPratosReducer from './ListaPratosReducer';
 import ListaBebidasReducer from './ListaBebidasReducer';
@@ -16,6 +17,8 @@ import ListaCategoriasAcompanhamentosReducer from './ListaCategoriasAcompanhamen
 
 export default combineReducers({
     AppReducer,
+    AutenticacaoReducer,
+    
     ListaPratosReducer,
     ListaBebidasReducer,
     ListaAcompanhamentosReducer,

@@ -5,6 +5,7 @@ import _ from 'lodash';
 import { modificaQuantidade, adicionaRefeicao, removeRefeicao, refeicoesFetch } from '../../actions/AppActions'
 import Categorias from './Categorias';
 import Pratos from './Pratos';
+import { Actions } from 'react-native-router-flux';
 
 class MyListItem extends Component {
     render() {
@@ -87,6 +88,12 @@ class PratoPrincipal extends Component {
                         title="Adicionar"
                         color="#841584"
                         accessibilityLabel="Adicione um prato ao seu pedido de refeição."
+                    />
+                    <Button
+                        onPress={ () => Actions.acompanhamentosPedido() }
+                        title="Avançar"
+                        color="#841584"
+                        accessibilityLabel="Avançe para a tela de acompanhamentos."
                     />
                 </View>
                 <View>

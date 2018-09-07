@@ -88,6 +88,11 @@ class BebidasPedido extends Component {
                         color="#841584"
                         accessibilityLabel="Adicione uma bebida ao seu pedido."
                     />
+                    <Button
+                        title="Finalizar"
+                        color="#841584"
+                        accessibilityLabel="Avançe para a tela de acompanhamentos."
+                    />
                 </View>
                 <View>
                     <ListView 
