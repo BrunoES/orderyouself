@@ -5,7 +5,6 @@
  */
 
 import React, { Component } from 'react';
-
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk'
@@ -13,6 +12,8 @@ import Routes from './src/Routes';
 import reducers from './src/reducers';
 
 import firebase from 'firebase';
+
+console.disableYellowBox = true;
 
 export default class App extends Component {
 

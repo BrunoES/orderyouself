@@ -336,3 +336,45 @@ export const acompanhamentosPedidoFetch = () => {
             })
     };
 }
+
+/* --------------------------------------------------------------------------------------------------- */
+
+export const cancelaPedido = acompanhamentoId => {
+    alert("cancelaPedido");
+    return;
+    /*
+    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+    return dispatch => {
+        firebase.database().ref(`/acompanhamentosPedido/${usuarioLogado}/${acompanhamentoId}`)
+            .remove()
+            .then(() => dispatch({
+                type: REMOVE_ACOMPANHAMENTO,
+                payload: ''
+            }))
+            .catch((erro) => dispatch({
+                type: REMOVE_ACOMPANHAMENTO,
+                payload: ''
+            }))
+    };
+    */
+}
+
+export const confirmaPedido = acompanhamentoPedido => {
+    alert("confirmaPedido");
+    return;
+    /*
+    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+    return dispatch => {
+        firebase.database().ref(`/acompanhamentosPedido/${usuarioLogado}/`)
+            .push(acompanhamentoPedido)
+            .then(() => dispatch({
+                type: ADICIONA_ACOMPANHAMENTO,
+                payload: acompanhamentoPedido
+            }))
+            .catch((erro) => dispatch({
+                type: ADICIONA_ACOMPANHAMENTO,
+                payload: ''
+            }))
+    };
+    */
+}

@@ -8,6 +8,7 @@ import Bebidas from './Bebidas';
 import MyListItem from './../MyListItem';
 
 import _ from 'lodash';
+import { Actions } from 'react-native-router-flux';
 
 class BebidasPedido extends Component {
 
@@ -77,6 +78,7 @@ class BebidasPedido extends Component {
                         accessibilityLabel="Adicione uma bebida ao seu pedido."
                     />
                     <Button
+                        onPress={ () => Actions.finalizar()}
                         title="Finalizar"
                         color="#841584"
                         accessibilityLabel="Avançe para a tela de acompanhamentos."
