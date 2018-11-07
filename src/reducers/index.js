@@ -14,6 +14,8 @@ import ListaCategoriasReducer from './ListaCategoriasReducer';
 import ListaCategoriasBebidasReducer from './ListaCategoriasBebidasReducer';
 import ListaCategoriasAcompanhamentosReducer from './ListaCategoriasAcompanhamentosReducer';
 
+import PedidoReducer from './PedidoReducer';
+
 
 export default combineReducers({
     AppReducer,
@@ -29,5 +31,7 @@ export default combineReducers({
 
     ListaCategoriasReducer,
     ListaCategoriasBebidasReducer,
-    ListaCategoriasAcompanhamentosReducer
+    ListaCategoriasAcompanhamentosReducer,
+
+    PedidoReducer
 });

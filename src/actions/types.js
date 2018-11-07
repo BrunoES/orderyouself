@@ -24,3 +24,7 @@ export const ADICIONA_ACOMPANHAMENTO = 'adiciona_acompanhamento';
 export const LISTA_ACOMPANHAMENTOSPEDIDO = 'lista_bebidasacompanhamento';
 export const REMOVE_ACOMPANHAMENTO = 'remove_acompanhamento';
 export const MODIFICA_QUANTIDADEACOMPANHAMENTO = 'modifica_quantidadeacompanhamento';
+
+export const CANCELA_PEDIDO = 'cancela_pedido';
+export const CONFIRMA_PEDIDO = 'confirma_pedido';
+export const CRIA_NOVO_PEDIDO = 'cria_novo_pedido';

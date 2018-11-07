@@ -24,14 +24,20 @@ import {
     ADICIONA_ACOMPANHAMENTO,
     LISTA_ACOMPANHAMENTOSPEDIDO,
     REMOVE_ACOMPANHAMENTO,
-    MODIFICA_QUANTIDADEACOMPANHAMENTO
+    MODIFICA_QUANTIDADEACOMPANHAMENTO,
+    CANCELA_PEDIDO,
+    CONFIRMA_PEDIDO,
+    CRIA_NOVO_PEDIDO
 } from './types';
 
 import _ from 'lodash';
 import firebase from 'firebase';
 
+const usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+const pedido = "b68cf9a9-c745-4752-95c2-8638732a94ce";
+
 export const categoriasFetch = () => {
-    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+
     return dispatch => {
         firebase.database().ref(`/categorias/${usuarioLogado}/`)
             .on("value", snapshot => {
@@ -41,7 +47,7 @@ export const categoriasFetch = () => {
 }
 
 export const pratosFetch = (idCategoria) => {
-    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+    
     return dispatch => {
         firebase.database().ref(`/pratos/${usuarioLogado}/${idCategoria}/`)
             .on("value", snapshot => {
@@ -51,7 +57,7 @@ export const pratosFetch = (idCategoria) => {
 }
 
 export const modificaCategoria = idCategoria => {
-    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+    
     return dispatch => {
         firebase.database().ref(`/categorias/${usuarioLogado}/${idCategoria}/`)
             .on("value", snapshot => {
@@ -74,7 +80,7 @@ export const modificaQuantidade = (quantidade) => {
 }
 
 export const modificaPrato = (idPrato, idCategoria) => {
-    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+
     return dispatch => {
         firebase.database().ref(`/pratos/${usuarioLogado}/${idCategoria}/${idPrato}/`)
             .on("value", snapshot => {
@@ -90,9 +96,9 @@ export const modificaPrato = (idPrato, idCategoria) => {
 }
 
 export const adicionaRefeicao = refeicao => {
-    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+
     return dispatch => {
-        firebase.database().ref(`/refeicoes/${usuarioLogado}/`)
+        firebase.database().ref(`/refeicoes/${usuarioLogado}/${pedido}/`)
             .push(refeicao)
             .then(() => dispatch({
                 type: ADICIONA_REFEICAO,
@@ -106,9 +112,9 @@ export const adicionaRefeicao = refeicao => {
 }
 
 export const removeRefeicao = refeicaoId => {
-    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+
     return dispatch => {
-        firebase.database().ref(`/refeicoes/${usuarioLogado}/${refeicaoId}`)
+        firebase.database().ref(`/refeicoes/${usuarioLogado}/${pedido}/${refeicaoId}`)
             .remove()
             .then(() => dispatch({
                 type: REMOVE_REFEICAO,
@@ -122,9 +128,9 @@ export const removeRefeicao = refeicaoId => {
 }
 
 export const refeicoesFetch = () => {
-    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+
     return dispatch => {
-        firebase.database().ref(`/refeicoes/${usuarioLogado}/`)
+        firebase.database().ref(`/refeicoes/${usuarioLogado}/${pedido}/`)
             .on("value", snapshot => {
                 dispatch({ type: LISTA_REFEICOES, payload: snapshot.val() });
             })
@@ -134,7 +140,7 @@ export const refeicoesFetch = () => {
 /* --------------------------------------------------------------------------------------------------- */
 
 export const categoriasBebidasFetch = () => {
-    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+
     return dispatch => {
         firebase.database().ref(`/categoriasBebidas/${usuarioLogado}/`)
             .on("value", snapshot => {
@@ -144,7 +150,7 @@ export const categoriasBebidasFetch = () => {
 }
 
 export const bebidasFetch = (bebidasCategoriaId) => {
-    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+
     return dispatch => {
         firebase.database().ref(`/bebidas/${usuarioLogado}/${bebidasCategoriaId}/`)
             .on("value", snapshot => {
@@ -154,7 +160,7 @@ export const bebidasFetch = (bebidasCategoriaId) => {
 }
 
 export const modificaCategoriaBebidas = bebidasCategoriaId => {
-    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+
     return dispatch => {
         firebase.database().ref(`/categoriasBebidas/${usuarioLogado}/${bebidasCategoriaId}/`)
             .on("value", snapshot => {
@@ -177,7 +183,7 @@ export const modificaQuantidadeBebida = (quantidade) => {
 }
 
 export const modificaBebida = (bebidaId, bebidasCategoriaId) => {
-    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+
     return dispatch => {
         firebase.database().ref(`/bebidas/${usuarioLogado}/${bebidasCategoriaId}/${bebidaId}/`)
             .on("value", snapshot => {
@@ -193,9 +199,9 @@ export const modificaBebida = (bebidaId, bebidasCategoriaId) => {
 }
 
 export const adicionaBebida = bebidaPedido => {
-    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+
     return dispatch => {
-        firebase.database().ref(`/bebidaspedido/${usuarioLogado}/`)
+        firebase.database().ref(`/bebidaspedido/${usuarioLogado}/${pedido}/`)
             .push(bebidaPedido)
             .then(() => dispatch({
                 type: ADICIONA_BEBIDA,
@@ -209,9 +215,9 @@ export const adicionaBebida = bebidaPedido => {
 }
 
 export const removeBebida = bebidaId => {
-    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+
     return dispatch => {
-        firebase.database().ref(`/bebidaspedido/${usuarioLogado}/${bebidaId}`)
+        firebase.database().ref(`/bebidaspedido/${usuarioLogado}/${pedido}/${bebidaId}`)
             .remove()
             .then(() => dispatch({
                 type: REMOVE_BEBIDA,
@@ -225,9 +231,9 @@ export const removeBebida = bebidaId => {
 }
 
 export const bebidasPedidoFetch = () => {
-    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+
     return dispatch => {
-        firebase.database().ref(`/bebidaspedido/${usuarioLogado}/`)
+        firebase.database().ref(`/bebidaspedido/${usuarioLogado}/${pedido}`)
             .on("value", snapshot => {
                 dispatch({ type: LISTA_BEBIDASPEDIDO, payload: snapshot.val() });
             })
@@ -237,7 +243,7 @@ export const bebidasPedidoFetch = () => {
 /* --------------------------------------------------------------------------------------------------- */
 
 export const categoriasAcompanhamentosFetch = () => {
-    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+
     return dispatch => {
         firebase.database().ref(`/categoriasAcompanhamentos/${usuarioLogado}/`)
             .on("value", snapshot => {
@@ -247,7 +253,7 @@ export const categoriasAcompanhamentosFetch = () => {
 }
 
 export const acompanhamentosFetch = (acompanhamentosCategoriaId) => {
-    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+    
     return dispatch => {
         firebase.database().ref(`/acompanhamentos/${usuarioLogado}/${acompanhamentosCategoriaId}/`)
             .on("value", snapshot => {
@@ -257,7 +263,7 @@ export const acompanhamentosFetch = (acompanhamentosCategoriaId) => {
 }
 
 export const modificaCategoriaAcompanhamentos = acompanhamentosCategoriaId => {
-    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+
     return dispatch => {
         firebase.database().ref(`/categoriasAcompanhamentos/${usuarioLogado}/${acompanhamentosCategoriaId}/`)
             .on("value", snapshot => {
@@ -280,7 +286,7 @@ export const modificaQuantidadeAcompanhamento = (quantidade) => {
 }
 
 export const modificaAcompanhamento = (acompanhamentoId, acompanhamentosCategoriaId) => {
-    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+
     return dispatch => {
         firebase.database().ref(`/acompanhamentos/${usuarioLogado}/${acompanhamentosCategoriaId}/${acompanhamentoId}/`)
             .on("value", snapshot => {
@@ -296,9 +302,9 @@ export const modificaAcompanhamento = (acompanhamentoId, acompanhamentosCategori
 }
 
 export const adicionaAcompanhamento = acompanhamentoPedido => {
-    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+
     return dispatch => {
-        firebase.database().ref(`/acompanhamentosPedido/${usuarioLogado}/`)
+        firebase.database().ref(`/acompanhamentosPedido/${usuarioLogado}/${pedido}/`)
             .push(acompanhamentoPedido)
             .then(() => dispatch({
                 type: ADICIONA_ACOMPANHAMENTO,
@@ -312,9 +318,9 @@ export const adicionaAcompanhamento = acompanhamentoPedido => {
 }
 
 export const removeAcompanhamento = acompanhamentoId => {
-    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+
     return dispatch => {
-        firebase.database().ref(`/acompanhamentosPedido/${usuarioLogado}/${acompanhamentoId}`)
+        firebase.database().ref(`/acompanhamentosPedido/${usuarioLogado}/${pedido}/${acompanhamentoId}`)
             .remove()
             .then(() => dispatch({
                 type: REMOVE_ACOMPANHAMENTO,
@@ -328,9 +334,9 @@ export const removeAcompanhamento = acompanhamentoId => {
 }
 
 export const acompanhamentosPedidoFetch = () => {
-    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+
     return dispatch => {
-        firebase.database().ref(`/acompanhamentosPedido/${usuarioLogado}/`)
+        firebase.database().ref(`/acompanhamentosPedido/${usuarioLogado}/${pedido}/`)
             .on("value", snapshot => {
                 dispatch({ type: LISTA_ACOMPANHAMENTOSPEDIDO, payload: snapshot.val() });
             })
@@ -338,43 +344,49 @@ export const acompanhamentosPedidoFetch = () => {
 }
 
 /* --------------------------------------------------------------------------------------------------- */
-
-export const cancelaPedido = acompanhamentoId => {
-    alert("cancelaPedido");
-    return;
-    /*
-    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+export const buscaPedidoAtual = () => {
     return dispatch => {
-        firebase.database().ref(`/acompanhamentosPedido/${usuarioLogado}/${acompanhamentoId}`)
-            .remove()
-            .then(() => dispatch({
-                type: REMOVE_ACOMPANHAMENTO,
-                payload: ''
-            }))
-            .catch((erro) => dispatch({
-                type: REMOVE_ACOMPANHAMENTO,
-                payload: ''
-            }))
-    };
-    */
+        const pedidoId = firebase.database().ref(`/pedidos/${usuarioLogado}/`).orderByChild("status").equalTo("opened");
+        console.log(pedidoId);
+   };
 }
 
-export const confirmaPedido = acompanhamentoPedido => {
-    alert("confirmaPedido");
-    return;
-    /*
-    let usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
+export const criaNovoPedido = () => {
     return dispatch => {
-        firebase.database().ref(`/acompanhamentosPedido/${usuarioLogado}/`)
-            .push(acompanhamentoPedido)
+         const pedidoId = firebase.database().ref(`/pedidos/${usuarioLogado}/`).push({ 'status': 'opened' }).key;
+         dispatch({
+            type: CRIA_NOVO_PEDIDO,
+            payload: pedidoId
+        });
+    };
+}
+
+export const cancelaPedido = () => {
+    return dispatch => {
+        firebase.database().ref(`/pedidos/${usuarioLogado}/${pedido}/`)
+            .update({ 'status': 'canceled' })
             .then(() => dispatch({
-                type: ADICIONA_ACOMPANHAMENTO,
-                payload: acompanhamentoPedido
+                type: CANCELA_PEDIDO,
+                payload: ''
             }))
             .catch((erro) => dispatch({
-                type: ADICIONA_ACOMPANHAMENTO,
+                type: CANCELA_PEDIDO,
                 payload: ''
             }))
     };
-    */
+}
+
+export const confirmaPedido = () => {
+    return dispatch => {
+        firebase.database().ref(`/pedidos/${usuarioLogado}/${pedido}/`)
+            .update({ 'status': 'confirmed' })
+            .then(() => dispatch({
+                type: CONFIRMA_PEDIDO,
+                payload: ''
+            }))
+            .catch((erro) => dispatch({
+                type: CONFIRMA_PEDIDO,
+                payload: ''
+            }))
+    };
 }

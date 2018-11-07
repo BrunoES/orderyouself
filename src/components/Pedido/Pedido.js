@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Button, ListView, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { refeicoesFetch, acompanhamentosPedidoFetch, bebidasPedidoFetch, cancelaPedido, finalizaPedido } from '../../actions/AppActions';
+import { refeicoesFetch, acompanhamentosPedidoFetch, bebidasPedidoFetch, cancelaPedido, confirmaPedido, criaNovoPedido, buscaPedidoAtual } from '../../actions/AppActions';
 import MyListItem from './../MyListItem';
 
 class Pedido extends Component {
@@ -63,17 +63,8 @@ class Pedido extends Component {
 
     _cancelaPedido() {
         this.props.cancelaPedido();
-        /*
-        this.props.cancelarPedido({
-            key: '1',
-            categoriaId: this.props.categoria.id,
-            categoria: this.props.categoria.descricao,
-            pratoId: this.props.prato.id,
-            prato: this.props.prato.descricao,
-            desc: this.props.prato.descricao,
-            quantidade: this.props.quantidade
-        });
-        */
+        this.props.buscaPedidoAtual();
+        //this.props.criaNovoPedido();
     }
 
     _finalizaPedido() {
@@ -152,4 +143,4 @@ mapStateToProps = state => {
     return { refeicoes, acompanhamentos, bebidas };
 }
 
-export default connect(mapStateToProps, { refeicoesFetch, acompanhamentosPedidoFetch, bebidasPedidoFetch, cancelaPedido, finalizaPedido })(Pedido);
+export default connect(mapStateToProps, { refeicoesFetch, acompanhamentosPedidoFetch, bebidasPedidoFetch, cancelaPedido, confirmaPedido, criaNovoPedido, buscaPedidoAtual })(Pedido);
