@@ -1,0 +1,203 @@
+{
+  "acompanhamentos" : {
+    "6abe636d-f47a-415e-9493-ac89db41361f" : {
+      "6abe636d-f47a-415e-9493-ac89db41361f" : {
+        "03182a68-703f-45dc-97bc-761572b04aea" : {
+          "desc" : "Filé",
+          "id" : 1
+        }
+      }
+    }
+  },
+  "acompanhamentosPedido" : {
+    "6abe636d-f47a-415e-9493-ac89db41361f" : {
+      "6b0307ad-d375-4af2-bd7b-a69fe56eed43" : {
+        "-LQlHWcNzG9VUY7A_KSN" : {
+          "acompanhamento" : "Filé",
+          "acompanhamentoId" : "03182a68-703f-45dc-97bc-761572b04aea",
+          "categoriaAcompanhamentos" : "Carnes",
+          "categoriaAcompanhamentosId" : "6abe636d-f47a-415e-9493-ac89db41361f",
+          "desc" : "Filé",
+          "key" : "1",
+          "quantidade" : "10"
+        },
+        "-LQlHXlOzG7cIRrBZsaf" : {
+          "acompanhamento" : "Filé",
+          "acompanhamentoId" : "03182a68-703f-45dc-97bc-761572b04aea",
+          "categoriaAcompanhamentos" : "Carnes",
+          "categoriaAcompanhamentosId" : "6abe636d-f47a-415e-9493-ac89db41361f",
+          "desc" : "Filé",
+          "key" : "1",
+          "quantidade" : "10"
+        },
+        "-LQlHXx7kP_7q5IGMS_Y" : {
+          "acompanhamento" : "Filé",
+          "acompanhamentoId" : "03182a68-703f-45dc-97bc-761572b04aea",
+          "categoriaAcompanhamentos" : "Carnes",
+          "categoriaAcompanhamentosId" : "6abe636d-f47a-415e-9493-ac89db41361f",
+          "desc" : "Filé",
+          "key" : "1",
+          "quantidade" : "10"
+        }
+      },
+      "b68cf9a9-c745-4752-95c2-8638732a94ce" : {
+        "-LQkbwvvGr9N0p1lbQc9" : {
+          "acompanhamento" : "Filé",
+          "acompanhamentoId" : "03182a68-703f-45dc-97bc-761572b04aea",
+          "categoriaAcompanhamentos" : "Carnes",
+          "categoriaAcompanhamentosId" : "6abe636d-f47a-415e-9493-ac89db41361f",
+          "desc" : "Filé",
+          "key" : "1",
+          "quantidade" : "5"
+        }
+      }
+    }
+  },
+  "bebidas" : {
+    "6abe636d-f47a-415e-9493-ac89db41361f" : {
+      "ad06be70-f3e1-4fb3-9b07-9a813dfb050f" : {
+        "9387477e-a683-41a0-8dca-68aaf7406146" : {
+          "desc" : "Suco de Laranja",
+          "id" : 1
+        }
+      }
+    }
+  },
+  "bebidaspedido" : {
+    "6abe636d-f47a-415e-9493-ac89db41361f" : {
+      "6b0307ad-d375-4af2-bd7b-a69fe56eed43" : {
+        "-LQlH_nhtVfHAvfGszch" : {
+          "bebida" : "Suco de Laranja",
+          "bebidaId" : "9387477e-a683-41a0-8dca-68aaf7406146",
+          "categoriaBebidas" : "Sucos",
+          "categoriaBebidasId" : "ad06be70-f3e1-4fb3-9b07-9a813dfb050f",
+          "desc" : "Suco de Laranja",
+          "key" : "1",
+          "quantidade" : "5"
+        }
+      },
+      "b68cf9a9-c745-4752-95c2-8638732a94ce" : {
+        "-LQkbzewzGs5EQt1zpxV" : {
+          "bebida" : "Suco de Laranja",
+          "bebidaId" : "9387477e-a683-41a0-8dca-68aaf7406146",
+          "categoriaBebidas" : "Sucos",
+          "categoriaBebidasId" : "ad06be70-f3e1-4fb3-9b07-9a813dfb050f",
+          "desc" : "Suco de Laranja",
+          "key" : "1",
+          "quantidade" : "8"
+        }
+      }
+    }
+  },
+  "categoriasAcompanhamentos" : {
+    "6abe636d-f47a-415e-9493-ac89db41361f" : {
+      "6abe636d-f47a-415e-9493-ac89db41361f" : {
+        "desc" : "Carnes",
+        "id" : 1
+      }
+    }
+  },
+  "categoriasBebidas" : {
+    "6abe636d-f47a-415e-9493-ac89db41361f" : {
+      "ad06be70-f3e1-4fb3-9b07-9a813dfb050f" : {
+        "desc" : "Sucos",
+        "id" : 1
+      }
+    }
+  },
+  "categoriasPratos" : {
+    "6abe636d-f47a-415e-9493-ac89db41361f" : {
+      "97c1a8fc-5485-44c1-86f6-44499f5b20b6" : {
+        "desc" : "Comida Caseira",
+        "id" : 1
+      }
+    }
+  },
+  "pedidoAtual" : {
+    "6abe636d-f47a-415e-9493-ac89db41361f" : {
+      "6b0307ad-d375-4af2-bd7b-a69fe56eed43" : {
+        "descricao" : "Pedido Atual"
+      },
+      "PedidoAtual" : "PedidoAtual"
+    }
+  },
+  "pedidos" : {
+    "6abe636d-f47a-415e-9493-ac89db41361f" : {
+      "b68cf9a9-c745-4752-95c2-8638732a94ce" : {
+        "status" : "confirmed"
+      }
+    }
+  },
+  "pratos" : {
+    "6abe636d-f47a-415e-9493-ac89db41361f" : {
+      "97c1a8fc-5485-44c1-86f6-44499f5b20b6" : {
+        "d773db70-dff9-416b-916f-d3b2de57dd50" : {
+          "desc" : "Arroz e Feijão",
+          "id" : 1
+        }
+      }
+    }
+  },
+  "refeicoes" : {
+    "6abe636d-f47a-415e-9493-ac89db41361f" : {
+      "6b0307ad-d375-4af2-bd7b-a69fe56eed43" : {
+        "-LQkkyAtR2HkVct4qNqA" : {
+          "categoria" : "Comida Caseira",
+          "categoriaId" : "97c1a8fc-5485-44c1-86f6-44499f5b20b6",
+          "desc" : "Arroz e Feijão",
+          "key" : "1",
+          "prato" : "Arroz e Feijão",
+          "pratoId" : "d773db70-dff9-416b-916f-d3b2de57dd50",
+          "quantidade" : ""
+        },
+        "-LQkl-Luwdh1vyMc_J0S" : {
+          "categoria" : "Comida Caseira",
+          "categoriaId" : "97c1a8fc-5485-44c1-86f6-44499f5b20b6",
+          "desc" : "Arroz e Feijão",
+          "key" : "1",
+          "prato" : "Arroz e Feijão",
+          "pratoId" : "d773db70-dff9-416b-916f-d3b2de57dd50",
+          "quantidade" : "2"
+        },
+        "-LQkmTQ1y-n1FmyS4ebi" : {
+          "categoria" : "Comida Caseira",
+          "categoriaId" : "97c1a8fc-5485-44c1-86f6-44499f5b20b6",
+          "desc" : "Arroz e Feijão",
+          "key" : "1",
+          "prato" : "Arroz e Feijão",
+          "pratoId" : "d773db70-dff9-416b-916f-d3b2de57dd50",
+          "quantidade" : ""
+        },
+        "-LQkncdzbW8x22BFiGUU" : {
+          "categoria" : "Comida Caseira",
+          "categoriaId" : "97c1a8fc-5485-44c1-86f6-44499f5b20b6",
+          "desc" : "Arroz e Feijão",
+          "key" : "1",
+          "prato" : "Arroz e Feijão",
+          "pratoId" : "d773db70-dff9-416b-916f-d3b2de57dd50",
+          "quantidade" : ""
+        },
+        "-LQkpXMsCkILFALQ-N7o" : {
+          "categoria" : "Comida Caseira",
+          "categoriaId" : "97c1a8fc-5485-44c1-86f6-44499f5b20b6",
+          "desc" : "Arroz e Feijão",
+          "key" : "1",
+          "prato" : "Arroz e Feijão",
+          "pratoId" : "d773db70-dff9-416b-916f-d3b2de57dd50",
+          "quantidade" : ""
+        }
+      },
+      "b68cf9a9-c745-4752-95c2-8638732a94ce" : {
+        "-LQkbuJ0uFVbDP05tpEH" : {
+          "categoria" : "Comida Caseira",
+          "categoriaId" : "97c1a8fc-5485-44c1-86f6-44499f5b20b6",
+          "desc" : "Arroz e Feijão",
+          "key" : "1",
+          "prato" : "Arroz e Feijão",
+          "pratoId" : "d773db70-dff9-416b-916f-d3b2de57dd50",
+          "quantidade" : "2"
+        }
+      }
+    }
+  }
+}
