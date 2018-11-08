@@ -18,13 +18,13 @@ class AcompanhamentosPedido extends Component {
     }
 
     componentWillMount() {
-        this.props.acompanhamentosPedidoFetch();
+        this.props.acompanhamentosPedidoFetch(this.props.pedidoAtual);
         this.criaFonteDeDados(this.props.acompanhamentos);
     }
 
     componentWillReceiveProps(nextProps) {
         if(this.props.acompanhamentos.length != nextProps.acompanhamentos.length){
-            this.props.acompanhamentosPedidoFetch();
+            this.props.acompanhamentosPedidoFetch(this.props.pedidoAtual);
         }
         this.criaFonteDeDados(nextProps.acompanhamentos);
     }
@@ -43,11 +43,12 @@ class AcompanhamentosPedido extends Component {
             acompanhamento: this.props.acompanhamento.descricao,
             desc: this.props.acompanhamento.descricao,
             quantidade: this.props.quantidadeAcompanhamento
-        });
+        },
+        this.props.pedidoAtual);
     }
 
     _removeAcompanhamento(acompanhamentoId) {
-        this.props.removeAcompanhamento(acompanhamentoId);
+        this.props.removeAcompanhamento(acompanhamentoId, this.props.pedidoAtual);
     }
 
     _renderRow(item) {

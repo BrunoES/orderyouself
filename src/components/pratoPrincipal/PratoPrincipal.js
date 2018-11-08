@@ -106,8 +106,6 @@ mapStateToProps = state => {
         return uid;
     })[0];
 
-    console.log(pedidoAtual);
-
     const refeicoes = _.map(state.ListaRefeicoesReducer, (val, uid) => {
         return { ...val, uid }
     });

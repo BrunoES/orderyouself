@@ -13,6 +13,11 @@ class InitQRCode extends Component {
         super(props);
     }
 
+
+    componentWillMount(){
+        this.props.getCurrentOrder();
+    }
+
     render() {
         return (
             <View>
