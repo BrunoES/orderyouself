@@ -101,11 +101,15 @@ mapStateToProps = state => {
     const bebida = state.AppReducer.bebida;
     const quantidadeBebida = state.AppReducer.quantidadeBebida;
     
+    const pedidoAtual = _.map(state.PedidoReducer, (val, uid) => {
+        return uid;
+    })[0];
+
     const bebidas = _.map(state.ListaBebidasPedidoReducer, (val, uid) => {
         return { ...val, uid }
     });
     
-    return { bebidas, categoriaBebidas, bebida, quantidadeBebida };
+    return { bebidas, categoriaBebidas, bebida, quantidadeBebida, pedidoAtual };
 }
 
 export default connect(mapStateToProps, { modificaQuantidadeBebida, adicionaBebida, removeBebida, bebidasPedidoFetch })(BebidasPedido);

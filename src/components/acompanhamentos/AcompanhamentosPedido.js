@@ -101,11 +101,15 @@ mapStateToProps = state => {
     const acompanhamento = state.AppReducer.acompanhamento;
     const quantidadeAcompanhamento = state.AppReducer.quantidadeAcompanhamento;
     
+    const pedidoAtual = _.map(state.PedidoReducer, (val, uid) => {
+        return uid;
+    })[0];
+
     const acompanhamentos = _.map(state.ListaAcompanhamentosPedidoReducer, (val, uid) => {
         return { ...val, uid }
     });
     
-    return { acompanhamentos, categoriaAcompanhamentos, acompanhamento, quantidadeAcompanhamento };
+    return { acompanhamentos, categoriaAcompanhamentos, acompanhamento, quantidadeAcompanhamento, pedidoAtual };
 }
 
 export default connect(mapStateToProps, { modificaQuantidadeAcompanhamento, adicionaAcompanhamento, removeAcompanhamento, acompanhamentosPedidoFetch })(AcompanhamentosPedido);

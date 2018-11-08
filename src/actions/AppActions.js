@@ -27,7 +27,8 @@ import {
     MODIFICA_QUANTIDADEACOMPANHAMENTO,
     CANCELA_PEDIDO,
     CONFIRMA_PEDIDO,
-    CRIA_NOVO_PEDIDO
+    CRIA_NOVO_PEDIDO,
+    RECUPERA_PEDIDO_ATUAL
 } from './types';
 
 import _ from 'lodash';
@@ -36,10 +37,19 @@ import firebase from 'firebase';
 const usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
 const pedido = "b68cf9a9-c745-4752-95c2-8638732a94ce";
 
+export const getCurrentOrder = () => {
+    return dispatch => {
+        firebase.database().ref(`/pedidoAtual/${usuarioLogado}/`)
+            .on("value", snapshot => {
+                dispatch({ type: RECUPERA_PEDIDO_ATUAL, payload: snapshot.val() });
+            })
+    }
+}
+
 export const categoriasFetch = () => {
 
     return dispatch => {
-        firebase.database().ref(`/categorias/${usuarioLogado}/`)
+        firebase.database().ref(`/categoriasPratos/${usuarioLogado}/`)
             .on("value", snapshot => {
                 dispatch({ type: LISTA_CATEGORIAS, payload: snapshot.val() });
             })
@@ -47,7 +57,7 @@ export const categoriasFetch = () => {
 }
 
 export const pratosFetch = (idCategoria) => {
-    
+
     return dispatch => {
         firebase.database().ref(`/pratos/${usuarioLogado}/${idCategoria}/`)
             .on("value", snapshot => {
@@ -57,17 +67,17 @@ export const pratosFetch = (idCategoria) => {
 }
 
 export const modificaCategoria = idCategoria => {
-    
+
     return dispatch => {
-        firebase.database().ref(`/categorias/${usuarioLogado}/${idCategoria}/`)
+        firebase.database().ref(`/categoriasPratos/${usuarioLogado}/${idCategoria}/`)
             .on("value", snapshot => {
                 dispatch({
                     type: MODIFICA_CATEGORIA,
                     payload: {
-                         id: idCategoria,
-                         descricao: _.values(snapshot.val())[0]
+                        id: idCategoria,
+                        descricao: _.values(snapshot.val())[0]
                     }
-                 });
+                });
             })
     }
 }
@@ -87,18 +97,18 @@ export const modificaPrato = (idPrato, idCategoria) => {
                 dispatch({
                     type: MODIFICA_PRATO,
                     payload: {
-                         id: idPrato,
-                         descricao: _.values(snapshot.val())[0]
+                        id: idPrato,
+                        descricao: _.values(snapshot.val())[0]
                     }
-                 });
+                });
             })
     }
 }
 
-export const adicionaRefeicao = refeicao => {
+export const adicionaRefeicao = (refeicao, pedidoAtual) => {
 
     return dispatch => {
-        firebase.database().ref(`/refeicoes/${usuarioLogado}/${pedido}/`)
+        firebase.database().ref(`/refeicoes/${usuarioLogado}/${pedidoAtual}/`)
             .push(refeicao)
             .then(() => dispatch({
                 type: ADICIONA_REFEICAO,
@@ -111,10 +121,10 @@ export const adicionaRefeicao = refeicao => {
     };
 }
 
-export const removeRefeicao = refeicaoId => {
+export const removeRefeicao = (refeicaoId, pedidoAtual) => {
 
     return dispatch => {
-        firebase.database().ref(`/refeicoes/${usuarioLogado}/${pedido}/${refeicaoId}`)
+        firebase.database().ref(`/refeicoes/${usuarioLogado}/${pedidoAtual}/${refeicaoId}`)
             .remove()
             .then(() => dispatch({
                 type: REMOVE_REFEICAO,
@@ -127,10 +137,9 @@ export const removeRefeicao = refeicaoId => {
     };
 }
 
-export const refeicoesFetch = () => {
-
+export const refeicoesFetch = (pedidoAtual) => {
     return dispatch => {
-        firebase.database().ref(`/refeicoes/${usuarioLogado}/${pedido}/`)
+        firebase.database().ref(`/refeicoes/${usuarioLogado}/${pedidoAtual}/`)
             .on("value", snapshot => {
                 dispatch({ type: LISTA_REFEICOES, payload: snapshot.val() });
             })
@@ -167,10 +176,10 @@ export const modificaCategoriaBebidas = bebidasCategoriaId => {
                 dispatch({
                     type: MODIFICA_CATEGORIABEBIDAS,
                     payload: {
-                         id: bebidasCategoriaId,
-                         descricao: _.values(snapshot.val())[0]
+                        id: bebidasCategoriaId,
+                        descricao: _.values(snapshot.val())[0]
                     }
-                 });
+                });
             })
     }
 }
@@ -190,10 +199,10 @@ export const modificaBebida = (bebidaId, bebidasCategoriaId) => {
                 dispatch({
                     type: MODIFICA_BEBIDA,
                     payload: {
-                         id: bebidaId,
-                         descricao: _.values(snapshot.val())[0]
+                        id: bebidaId,
+                        descricao: _.values(snapshot.val())[0]
                     }
-                 });
+                });
             })
     }
 }
@@ -253,7 +262,7 @@ export const categoriasAcompanhamentosFetch = () => {
 }
 
 export const acompanhamentosFetch = (acompanhamentosCategoriaId) => {
-    
+
     return dispatch => {
         firebase.database().ref(`/acompanhamentos/${usuarioLogado}/${acompanhamentosCategoriaId}/`)
             .on("value", snapshot => {
@@ -270,10 +279,10 @@ export const modificaCategoriaAcompanhamentos = acompanhamentosCategoriaId => {
                 dispatch({
                     type: MODIFICA_CATEGORIAACOMPANHAMENTOS,
                     payload: {
-                         id: acompanhamentosCategoriaId,
-                         descricao: _.values(snapshot.val())[0]
+                        id: acompanhamentosCategoriaId,
+                        descricao: _.values(snapshot.val())[0]
                     }
-                 });
+                });
             })
     }
 }
@@ -293,10 +302,10 @@ export const modificaAcompanhamento = (acompanhamentoId, acompanhamentosCategori
                 dispatch({
                     type: MODIFICA_ACOMPANHAMENTO,
                     payload: {
-                         id: acompanhamentoId,
-                         descricao: _.values(snapshot.val())[0]
+                        id: acompanhamentoId,
+                        descricao: _.values(snapshot.val())[0]
                     }
-                 });
+                });
             })
     }
 }
@@ -347,14 +356,13 @@ export const acompanhamentosPedidoFetch = () => {
 export const buscaPedidoAtual = () => {
     return dispatch => {
         const pedidoId = firebase.database().ref(`/pedidos/${usuarioLogado}/`).orderByChild("status").equalTo("opened");
-        console.log(pedidoId);
-   };
+    };
 }
 
 export const criaNovoPedido = () => {
     return dispatch => {
-         const pedidoId = firebase.database().ref(`/pedidos/${usuarioLogado}/`).push({ 'status': 'opened' }).key;
-         dispatch({
+        const pedidoId = firebase.database().ref(`/pedidos/${usuarioLogado}/`).push({ 'status': 'opened' }).key;
+        dispatch({
             type: CRIA_NOVO_PEDIDO,
             payload: pedidoId
         });

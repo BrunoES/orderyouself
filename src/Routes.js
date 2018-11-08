@@ -5,6 +5,7 @@ import Menu from './components/Menu';
 
 import FormLogin from './components/FormLogin';
 import FormCadastro from './components/FormCadastro';
+import InitQRCode from './components/initQRCode';
 
 import PratoPrincipal from './components/pratoPrincipal/PratoPrincipal';
 import BebidasPedido from './components/bebidas/BebidasPedido';
@@ -16,7 +17,8 @@ export default props => (
         <Scene key="root">
             <Scene key='formLogin' component={FormLogin} title="Login" />
             <Scene key='formCadastro' component={FormCadastro} title="Cadastro" />
-            <Scene key='pratoPrincipal' component={PratoPrincipal} title="Prato Principal" initial />
+            <Scene key='iniciar' component={InitQRCode} title="Iniciar" initial />
+            <Scene key='pratoPrincipal' component={PratoPrincipal} title="Prato Principal" />
             <Scene key='bebidasPedido' component={BebidasPedido} title="Bebidas Pedido"  />
             <Scene key='acompanhamentosPedido' component={AcompanhamentosPedido} title="Acompanhamentos" />
             <Scene key='finalizar' component={Pedido} title="Finalizar" />

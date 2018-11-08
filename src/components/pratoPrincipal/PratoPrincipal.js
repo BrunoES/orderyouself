@@ -3,7 +3,7 @@ import { View, Text, ListView, Button, TextInput, TouchableOpacity, TouchableHig
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 
-import { modificaQuantidade, adicionaRefeicao, removeRefeicao, refeicoesFetch } from '../../actions/AppActions'
+import { modificaQuantidade, adicionaRefeicao, removeRefeicao, refeicoesFetch, getCurrentOrder } from '../../actions/AppActions';
 import Categorias from './Categorias';
 import Pratos from './Pratos';
 import MyListItem from './../MyListItem';
@@ -18,13 +18,13 @@ class PratoPrincipal extends Component {
     }
 
     componentWillMount() {
-        this.props.refeicoesFetch();
+        this.props.refeicoesFetch(this.props.pedidoAtual);
         this.criaFonteDeDados(this.props.refeicoes);
     }
 
     componentWillReceiveProps(nextProps) {
         if(this.props.refeicoes.length != nextProps.refeicoes.length){
-            this.props.refeicoesFetch();
+            this.props.refeicoesFetch(this.props.pedidoAtual);
         }
         this.criaFonteDeDados(nextProps.refeicoes);
     }
@@ -43,11 +43,12 @@ class PratoPrincipal extends Component {
             prato: this.props.prato.descricao,
             desc: this.props.prato.descricao,
             quantidade: this.props.quantidade
-        });
+        },
+        this.props.pedidoAtual);
     }
 
     _removeRefeicao(refeicaoId) {
-        this.props.removeRefeicao(refeicaoId);
+        this.props.removeRefeicao(refeicaoId, this.props.pedidoAtual);
     }
 
     _renderRow(item) {
@@ -100,12 +101,18 @@ mapStateToProps = state => {
     const categoria = state.AppReducer.categoria;
     const prato = state.AppReducer.prato;
     const quantidade = state.AppReducer.quantidade;
-    
+
+    const pedidoAtual = _.map(state.PedidoReducer, (val, uid) => {
+        return uid;
+    })[0];
+
+    console.log(pedidoAtual);
+
     const refeicoes = _.map(state.ListaRefeicoesReducer, (val, uid) => {
         return { ...val, uid }
     });
 
-    return { refeicoes, categoria, prato, quantidade };
+    return { refeicoes, categoria, prato, quantidade, pedidoAtual };
 }
 
-export default connect(mapStateToProps, { modificaQuantidade, adicionaRefeicao, removeRefeicao, refeicoesFetch })(PratoPrincipal);
+export default connect(mapStateToProps, { modificaQuantidade, adicionaRefeicao, removeRefeicao, refeicoesFetch, getCurrentOrder })(PratoPrincipal);
