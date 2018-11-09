@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Button, ListView, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { refeicoesFetch, acompanhamentosPedidoFetch, bebidasPedidoFetch, cancelaPedido, confirmaPedido, criaNovoPedido, buscaPedidoAtual } from '../../actions/AppActions';
+import { refeicoesFetch, acompanhamentosPedidoFetch, bebidasPedidoFetch, cancelaPedido, confirmaPedido, criaNovoPedido, buscaPedidoAtual, deletaPedidoAtual } from '../../actions/AppActions';
 import MyListItem from './../MyListItem';
 
 class Pedido extends Component {
@@ -68,7 +68,9 @@ class Pedido extends Component {
     }
 
     _finalizaPedido() {
-        this.props.confirmaPedido();
+        this.props.confirmaPedido(this.props.pedidoAtual);
+        this.props.deletaPedidoAtual(this.props.pedidoAtual);
+        this.props.criaNovoPedido();
     }
 
 
@@ -132,6 +134,10 @@ mapStateToProps = state => {
         return { ...val, uid }
     });
 
+    const pedidoAtual = _.map(state.PedidoReducer, (val, uid) => {
+        return uid;
+    })[0];
+
     const acompanhamentos = _.map(state.ListaAcompanhamentosPedidoReducer, (val, uid) => {
         return { ...val, uid }
     });
@@ -140,7 +146,7 @@ mapStateToProps = state => {
         return { ...val, uid }
     });
 
-    return { refeicoes, acompanhamentos, bebidas };
+    return { refeicoes, acompanhamentos, bebidas, pedidoAtual };
 }
 
-export default connect(mapStateToProps, { refeicoesFetch, acompanhamentosPedidoFetch, bebidasPedidoFetch, cancelaPedido, confirmaPedido, criaNovoPedido, buscaPedidoAtual })(Pedido);
+export default connect(mapStateToProps, { refeicoesFetch, acompanhamentosPedidoFetch, bebidasPedidoFetch, cancelaPedido, confirmaPedido, criaNovoPedido, buscaPedidoAtual, deletaPedidoAtual })(Pedido);

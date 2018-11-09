@@ -29,3 +29,4 @@ export const CANCELA_PEDIDO = 'cancela_pedido';
 export const CONFIRMA_PEDIDO = 'confirma_pedido';
 export const CRIA_NOVO_PEDIDO = 'cria_novo_pedido';
 export const RECUPERA_PEDIDO_ATUAL = 'recupera_pedido_atual';
+export const REMOVE_PEDIDO_ATUAL = 'remove_pedido_atual';
