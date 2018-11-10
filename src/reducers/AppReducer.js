@@ -55,7 +55,7 @@ export default (state = INITIAL_STATE, action) => {
         case MODIFICA_QUANTIDADE:
             return { ...state, quantidade: action.payload };
         case REMOVE_REFEICAO:
-            return { ...state, prato: action.payload };
+            return { ...state, prato: action.payload, quantidade: '' };
         
         case MODIFICA_CATEGORIABEBIDAS:
             return { ...state, categoriaBebidas: action.payload };
@@ -64,7 +64,7 @@ export default (state = INITIAL_STATE, action) => {
         case MODIFICA_QUANTIDADEBEBIDA:
             return { ...state, quantidadeBebida: action.payload };
         case REMOVE_BEBIDA:
-            return { ...state, bebida: action.payload };
+            return { ...state, bebida: action.payload, quantidadeBebida: '' };
 
         case MODIFICA_CATEGORIAACOMPANHAMENTOS:
             return { ...state, categoriaAcompanhamentos: action.payload };
@@ -73,7 +73,7 @@ export default (state = INITIAL_STATE, action) => {
         case MODIFICA_QUANTIDADEACOMPANHAMENTO:
             return { ...state, quantidadeAcompanhamento: action.payload };
         case REMOVE_ACOMPANHAMENTO:
-            return { ...state, acompanhamento: action.payload };
+            return { ...state, acompanhamento: action.payload, quantidadeAcompanhamento: '' };
 
         default:
             return state;

@@ -35,16 +35,22 @@ class BebidasPedido extends Component {
     }
 
     _adicionaBebida() {
-        this.props.adicionaBebida({
-            key: '1',
-            categoriaBebidasId: this.props.categoriaBebidas.id,
-            categoriaBebidas: this.props.categoriaBebidas.descricao,
-            bebidaId: this.props.bebida.id,
-            bebida: this.props.bebida.descricao,
-            desc: this.props.bebida.descricao,
-            quantidade: this.props.quantidadeBebida
-        },
-        this.props.pedidoAtual);
+        if ((this.props.categoriaBebidas.id && this.props.categoriaBebidas.id != 0) &&
+            (this.props.bebida.id && this.props.bebida.id != 0) &&
+            (this.props.quantidadeBebida && this.props.quantidadeBebida != 0)){
+            this.props.adicionaBebida({
+                key: '1',
+                categoriaBebidasId: this.props.categoriaBebidas.id,
+                categoriaBebidas: this.props.categoriaBebidas.descricao,
+                bebidaId: this.props.bebida.id,
+                bebida: this.props.bebida.descricao,
+                desc: this.props.bebida.descricao,
+                quantidade: this.props.quantidadeBebida
+            },
+            this.props.pedidoAtual);
+        } else {
+            alert("Por favor, informe a Categoria, Prato, e Quantidade.");
+        }
     }
 
     _removeBebida(bebidaId) {
@@ -55,7 +61,7 @@ class BebidasPedido extends Component {
         return (
             <View>
                 <TouchableHighlight onPress={ () => this._removeBebida(item.uid) }>
-                    <MyListItem desc={item.desc} quantidade={item.quantidadeBebida} />
+                    <MyListItem desc={item.desc} quantidade={item.quantidade} />
                 </TouchableHighlight>
             </View>
         );
@@ -72,6 +78,13 @@ class BebidasPedido extends Component {
                         onChangeText={text => this.props.modificaQuantidadeBebida(text) }
                         placeholder={"Quantidade"}
                     />
+                    <View>
+                        <ListView 
+                        enableEmptySections
+                        dataSource={this.dataSource}
+                        renderRow={this._renderRow}
+                        />   
+                    </View>
                     <Button
                         onPress={() => this._adicionaBebida()}
                         title="Adicionar"
@@ -84,13 +97,6 @@ class BebidasPedido extends Component {
                         color="#841584"
                         accessibilityLabel="Avançe para a tela de acompanhamentos."
                     />
-                </View>
-                <View>
-                    <ListView 
-                     enableEmptySections
-                     dataSource={this.dataSource}
-                     renderRow={this._renderRow}
-                    />   
                 </View>
             </View>
         );

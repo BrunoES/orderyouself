@@ -35,16 +35,22 @@ class AcompanhamentosPedido extends Component {
     }
 
     _adicionaAcompanhamento() {
-        this.props.adicionaAcompanhamento({
-            key: '1',
-            categoriaAcompanhamentosId: this.props.categoriaAcompanhamentos.id,
-            categoriaAcompanhamentos: this.props.categoriaAcompanhamentos.descricao,
-            acompanhamentoId: this.props.acompanhamento.id,
-            acompanhamento: this.props.acompanhamento.descricao,
-            desc: this.props.acompanhamento.descricao,
-            quantidade: this.props.quantidadeAcompanhamento
-        },
-        this.props.pedidoAtual);
+        if ((this.props.categoriaAcompanhamentos.id && this.props.categoriaAcompanhamentos.id != 0) &&
+            (this.props.acompanhamento.id && this.props.acompanhamento.id != 0) &&
+            (this.props.quantidadeAcompanhamento && this.props.quantidadeAcompanhamento != 0)){
+            this.props.adicionaAcompanhamento({
+                key: '1',
+                categoriaAcompanhamentosId: this.props.categoriaAcompanhamentos.id,
+                categoriaAcompanhamentos: this.props.categoriaAcompanhamentos.descricao,
+                acompanhamentoId: this.props.acompanhamento.id,
+                acompanhamento: this.props.acompanhamento.descricao,
+                desc: this.props.acompanhamento.descricao,
+                quantidade: this.props.quantidadeAcompanhamento
+            },
+            this.props.pedidoAtual);
+        } else {
+            alert("Por favor, informe a Categoria, Prato, e Quantidade.");
+        }
     }
 
     _removeAcompanhamento(acompanhamentoId) {
@@ -55,7 +61,7 @@ class AcompanhamentosPedido extends Component {
         return (
             <View>
                 <TouchableHighlight onPress={ () => this._removeAcompanhamento(item.uid) }>
-                    <MyListItem desc={item.desc} quantidade={item.quantidadeAcompanhamento} />
+                    <MyListItem desc={item.desc} quantidade={item.quantidade} />
                 </TouchableHighlight>
             </View>
         );
@@ -72,6 +78,13 @@ class AcompanhamentosPedido extends Component {
                         onChangeText={text => this.props.modificaQuantidadeAcompanhamento(text) }
                         placeholder={"Quantidade"}
                     />
+                    <View>
+                        <ListView 
+                        enableEmptySections
+                        dataSource={this.dataSource}
+                        renderRow={this._renderRow}
+                        />   
+                    </View>
                     <Button
                         onPress={() => this._adicionaAcompanhamento()}
                         title="Adicionar"
@@ -84,13 +97,6 @@ class AcompanhamentosPedido extends Component {
                         color="#841584"
                         accessibilityLabel="Avançe para a tela de acompanhamentos."
                     />
-                </View>
-                <View>
-                    <ListView 
-                     enableEmptySections
-                     dataSource={this.dataSource}
-                     renderRow={this._renderRow}
-                    />   
                 </View>
             </View>
         );

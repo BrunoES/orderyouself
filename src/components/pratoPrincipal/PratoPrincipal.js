@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ListView, Button, TextInput, TouchableOpacity, TouchableHighlight } from 'react-native';
+import { View, Text, ListView, Button, TextInput, ScrollView, TouchableHighlight } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 
@@ -35,16 +35,22 @@ class PratoPrincipal extends Component {
     }
 
     _adicionaRefeicao() {
-        this.props.adicionaRefeicao({
-            key: '1',
-            categoriaId: this.props.categoria.id,
-            categoria: this.props.categoria.descricao,
-            pratoId: this.props.prato.id,
-            prato: this.props.prato.descricao,
-            desc: this.props.prato.descricao,
-            quantidade: this.props.quantidade
-        },
-        this.props.pedidoAtual);
+        if ((this.props.categoria.id && this.props.categoria.id != 0) &&
+            (this.props.prato.id && this.props.prato.id != 0) &&
+            (this.props.quantidade && this.props.quantidade != 0)){
+            this.props.adicionaRefeicao({
+                key: '1',
+                categoriaId: this.props.categoria.id,
+                categoria: this.props.categoria.descricao,
+                pratoId: this.props.prato.id,
+                prato: this.props.prato.descricao,
+                desc: this.props.prato.descricao,
+                quantidade: this.props.quantidade
+            },
+            this.props.pedidoAtual);
+        } else {
+            alert("Por favor, informe a Categoria, Prato, e Quantidade.");
+        }
     }
 
     _removeRefeicao(refeicaoId) {
@@ -72,6 +78,15 @@ class PratoPrincipal extends Component {
                         onChangeText={text => this.props.modificaQuantidade(text) }
                         placeholder={"Quantidade"}
                     />
+                    <View>
+                        <ScrollView>
+                            <ListView 
+                                enableEmptySections
+                                dataSource={this.dataSource}
+                                renderRow={this._renderRow}
+                            />
+                        </ScrollView>
+                    </View>
                     <Button
                         onPress={() => this._adicionaRefeicao()}
                         title="Adicionar"
@@ -84,13 +99,6 @@ class PratoPrincipal extends Component {
                         color="#841584"
                         accessibilityLabel="Avançe para a tela de acompanhamentos."
                     />
-                </View>
-                <View>
-                    <ListView 
-                     enableEmptySections
-                     dataSource={this.dataSource}
-                     renderRow={this._renderRow}
-                    />   
                 </View>
             </View>
         );

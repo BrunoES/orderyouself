@@ -62,9 +62,9 @@ class Pedido extends Component {
     }
 
     _cancelaPedido() {
-        this.props.cancelaPedido();
-        this.props.buscaPedidoAtual();
-        //this.props.criaNovoPedido();
+        this.props.cancelaPedido(this.props.pedidoAtual);
+        this.props.deletaPedidoAtual(this.props.pedidoAtual);
+        this.props.criaNovoPedido();
     }
 
     _finalizaPedido() {

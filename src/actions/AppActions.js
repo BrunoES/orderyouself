@@ -380,7 +380,6 @@ export const deletaPedidoAtual = (pedidoAtual) => {
     };
 }
 
-
 export const cancelaPedido = (pedidoAtual) => {
     return dispatch => {
         firebase.database().ref(`/pedidos/${usuarioLogado}/${pedidoAtual}/`)
