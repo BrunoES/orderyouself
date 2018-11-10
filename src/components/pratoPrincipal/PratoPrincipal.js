@@ -69,8 +69,8 @@ class PratoPrincipal extends Component {
 
     render() {
         return (
-            <View>
-                <View>
+            <View style={{ flex: 1 }}>
+                <View style={{ flex: 0.4 }}>
                     <Categorias />
                     <Pratos />
                     <TextInput
@@ -78,27 +78,32 @@ class PratoPrincipal extends Component {
                         onChangeText={text => this.props.modificaQuantidade(text) }
                         placeholder={"Quantidade"}
                     />
-                    <View>
-                        <ScrollView>
-                            <ListView 
-                                enableEmptySections
-                                dataSource={this.dataSource}
-                                renderRow={this._renderRow}
-                            />
-                        </ScrollView>
+                </View>
+                <View style={{ flex: 0.5 }}>
+                    <ListView
+                        style={{ marginBottom: 5, marginTop: 5 }}
+                        enableEmptySections
+                        dataSource={this.dataSource}
+                        renderRow={this._renderRow}
+                    />
+                </View>
+                <View style={{ flex: 0.1, flexDirection: 'row' }}>
+                    <View style={{ flex: 0.5, marginTop: 7, marginRight: 5, marginLeft: 5 }}>
+                        <Button
+                            onPress={() => this._adicionaRefeicao()}
+                            title="Adicionar"
+                            color="#841584"
+                            accessibilityLabel="Adicione um prato ao seu pedido de refeição."
+                        />
                     </View>
-                    <Button
-                        onPress={() => this._adicionaRefeicao()}
-                        title="Adicionar"
-                        color="#841584"
-                        accessibilityLabel="Adicione um prato ao seu pedido de refeição."
-                    />
-                    <Button
-                        onPress={ () => Actions.acompanhamentosPedido() }
-                        title="Avançar"
-                        color="#841584"
-                        accessibilityLabel="Avançe para a tela de acompanhamentos."
-                    />
+                    <View style={{ flex: 0.5, marginTop: 7, marginRight: 5, marginLeft: 5 }}>
+                        <Button
+                            onPress={ () => Actions.acompanhamentosPedido() }
+                            title="Avançar"
+                            color="#841584"
+                            accessibilityLabel="Avançe para a tela de acompanhamentos."
+                        />
+                    </View>
                 </View>
             </View>
         );

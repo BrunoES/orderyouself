@@ -35,7 +35,7 @@ class Pedido extends Component {
         return (
             <View>
                 <TouchableHighlight>
-                    <MyListItem desc={item.desc} quantidade={item.quantidadeBebida} />
+                    <MyListItem desc={item.desc} quantidade={item.quantidade} />
                 </TouchableHighlight>
             </View>
         );
@@ -45,7 +45,7 @@ class Pedido extends Component {
         return (
             <View>
                 <TouchableHighlight>
-                    <MyListItem desc={item.desc} quantidade={item.quantidadeBebida} />
+                    <MyListItem desc={item.desc} quantidade={item.quantidade} />
                 </TouchableHighlight>
             </View>
         );
@@ -55,7 +55,7 @@ class Pedido extends Component {
         return (
             <View>
                 <TouchableHighlight>
-                    <MyListItem desc={item.desc} quantidade={item.quantidadeBebida} />
+                    <MyListItem desc={item.desc} quantidade={item.quantidade} />
                 </TouchableHighlight>
             </View>
         );
@@ -76,53 +76,48 @@ class Pedido extends Component {
 
     render() {
         return (
-            <View>
-                <View>
-                    <Text style={{ fontSize: 35, marginTop: 20, marginLeft: 12 }}>Pedido</Text>
-                </View>
-                <View>
-                    <Text style={{ fontSize: 18, marginTop: 20, marginLeft: 12 }}>Refeições</Text>
-                </View>
-                <View>
+            <View style={{ flex: 1 }}>
+                <View style={{ flex: 0.3 }}>
+                    <Text style={{ fontSize: 18, marginTop: 2, marginLeft: 12 }}>Refeições</Text>
                     <ListView 
                         enableEmptySections
                         dataSource={this.dataSourceRefeicoes}
                         renderRow={this._renderRowRefeicoes}
                     />   
                 </View>
-                <View>
-                    <Text style={{ fontSize: 18, marginTop: 20, marginLeft: 12 }}>Acompanhamentos</Text>
-                </View>
-                <View>
+                <View style={{ flex: 0.3 }}>
+                    <Text style={{ fontSize: 18, marginTop: 2, marginLeft: 12 }}>Acompanhamentos</Text>
                     <ListView 
                         enableEmptySections
                         dataSource={this.dataSourceAcompanhamentos}
                         renderRow={this._renderRowAcompanhamentos}
                     />   
                 </View>
-                <View>
-                    <Text style={{ fontSize: 18, marginTop: 20, marginLeft: 12 }}>Bebidas</Text>
-                </View>
-                <View>
+                <View style={{ flex: 0.3 }}>
+                    <Text style={{ fontSize: 18, marginTop: 2, marginLeft: 12 }}>Bebidas</Text>
                     <ListView 
                         enableEmptySections
                         dataSource={this.dataSourceBebidas}
                         renderRow={this._renderRowBebidas}
                     />   
                 </View>
-                <View style={{ marginTop: 20 }}>
-                    <Button
-                        onPress={() => this._cancelaPedido()}
-                        title="Cancelar"
-                        color="#841584"
-                        accessibilityLabel="Cancelar Pedido."
-                    />
-                    <Button
-                        onPress={() => this._finalizaPedido()}
-                        title="Confirmar"
-                        color="#841584"
-                        accessibilityLabel="Confirmar Pedido."
-                    />
+                <View style={{ flex: 0.1, marginTop: 1, flexDirection: 'row' }}>
+                    <View style={{ flex: 0.5, marginTop: 7, marginRight: 5, marginLeft: 5 }}>
+                        <Button
+                            onPress={() => this._cancelaPedido()}
+                            title="Cancelar"
+                            color="#841584"
+                            accessibilityLabel="Cancelar Pedido."
+                        />
+                    </View>
+                    <View style={{ flex: 0.5, marginTop: 7, marginRight: 5, marginLeft: 5 }}>
+                        <Button
+                            onPress={() => this._finalizaPedido()}
+                            title="Confirmar"
+                            color="#841584"
+                            accessibilityLabel="Confirmar Pedido."
+                        />
+                    </View>
                 </View>
             </View>
         );

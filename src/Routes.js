@@ -13,7 +13,7 @@ import AcompanhamentosPedido from './components/acompanhamentos/AcompanhamentosP
 import Pedido from './components/Pedido/Pedido';
 
 export default props => (
-    <Router navigationBarStyle={{ backgroundColor: '#115E54'}} titleStyle={{ color: '#fff' }} >
+    <Router navigationBarStyle={{ backgroundColor: '#f46e41'}} titleStyle={{ color: '#fff' }} >
         <Scene key="root">
             <Scene key='formLogin' component={FormLogin} title="Login" />
             <Scene key='formCadastro' component={FormCadastro} title="Cadastro" />
@@ -21,7 +21,7 @@ export default props => (
             <Scene key='pratoPrincipal' component={PratoPrincipal} title="Prato Principal" />
             <Scene key='bebidasPedido' component={BebidasPedido} title="Bebidas Pedido"  />
             <Scene key='acompanhamentosPedido' component={AcompanhamentosPedido} title="Acompanhamentos" />
-            <Scene key='finalizar' component={Pedido} title="Finalizar" />
+            <Scene key='finalizar' component={Pedido} title="Finalizar Pedido" />
             <Scene key='menu' component={Menu} title="Menu" />
         </Scene>
     </Router>

@@ -69,8 +69,8 @@ class BebidasPedido extends Component {
 
     render() {
         return (
-            <View>
-                <View>
+            <View style={{ flex: 1 }}>
+                <View style={{ flex: 0.4 }}>
                     <CategoriaBebidas />
                     <Bebidas />
                     <TextInput
@@ -78,25 +78,32 @@ class BebidasPedido extends Component {
                         onChangeText={text => this.props.modificaQuantidadeBebida(text) }
                         placeholder={"Quantidade"}
                     />
-                    <View>
-                        <ListView 
+                </View>
+                <View style={{ flex: 0.5 }}>
+                    <ListView 
+                        style={{ marginBottom: 5, marginTop: 5 }}
                         enableEmptySections
                         dataSource={this.dataSource}
                         renderRow={this._renderRow}
-                        />   
+                    />   
+                </View>
+                <View style={{ flex: 0.1, flexDirection: 'row' }}>
+                    <View style={{ flex: 0.5, marginTop: 7, marginRight: 5, marginLeft: 5 }}>
+                        <Button
+                            onPress={() => this._adicionaBebida()}
+                            title="Adicionar"
+                            color="#841584"
+                            accessibilityLabel="Adicione uma bebida ao seu pedido."
+                        />
                     </View>
-                    <Button
-                        onPress={() => this._adicionaBebida()}
-                        title="Adicionar"
-                        color="#841584"
-                        accessibilityLabel="Adicione uma bebida ao seu pedido."
-                    />
-                    <Button
-                        onPress={ () => Actions.finalizar()}
-                        title="Finalizar"
-                        color="#841584"
-                        accessibilityLabel="Avançe para a tela de acompanhamentos."
-                    />
+                    <View style={{ flex: 0.5, marginTop: 7, marginRight: 5, marginLeft: 5 }}>
+                        <Button
+                            onPress={ () => Actions.finalizar()}
+                            title="Finalizar"
+                            color="#841584"
+                            accessibilityLabel="Avançe para a tela de acompanhamentos."
+                        />
+                    </View>
                 </View>
             </View>
         );
