@@ -70,7 +70,7 @@ class AcompanhamentosPedido extends Component {
     render() {
         return (
                 
-            <View style={{ flex: 1 }}>
+            <View style={{ flex: 1, backgroundColor: "#ffffff" }}>
                 <View style={{ flex: 0.4 }}>
                     <CategoriaAcompanhamentos />
                     <Acompanhamentos />
@@ -78,6 +78,7 @@ class AcompanhamentosPedido extends Component {
                         value={this.props.quantidadeAcompanhamento}
                         onChangeText={text => this.props.modificaQuantidadeAcompanhamento(text) }
                         placeholder={"Quantidade"}
+                        style={{ marginHorizontal: 20, fontSize: 17 }}
                     />
                 </View>
                 <View style={{ flex: 0.5 }}>

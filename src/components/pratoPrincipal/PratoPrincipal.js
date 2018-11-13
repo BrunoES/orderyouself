@@ -69,7 +69,7 @@ class PratoPrincipal extends Component {
 
     render() {
         return (
-            <View style={{ flex: 1 }}>
+            <View style={{ flex: 1, backgroundColor: "#ffffff" }}>
                 <View style={{ flex: 0.4 }}>
                     <Categorias />
                     <Pratos />
@@ -77,6 +77,7 @@ class PratoPrincipal extends Component {
                         value={this.props.quantidade}
                         onChangeText={text => this.props.modificaQuantidade(text) }
                         placeholder={"Quantidade"}
+                        style={{ marginHorizontal: 20, fontSize: 17 }}
                     />
                 </View>
                 <View style={{ flex: 0.5 }}>

@@ -9,10 +9,14 @@ export default class MyListItem extends Component {
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 padding: 10,
-                margin: 2,
+                marginLeft: 15,
+                marginRight: 15,
+                marginTop: 5,
+                marginBottom: 5,
                 borderColor: '#2a4944',
                 borderWidth: 1,
-                backgroundColor: '#f46e41'}}
+                backgroundColor: '#f46e41',
+                borderRadius: 8 }}
             >
                 <Text style={{ color: textColor, fontSize: 18, marginLeft: 20, marginRight: 20 }}>
                     {this.props.desc}

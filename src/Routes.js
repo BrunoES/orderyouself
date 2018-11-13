@@ -13,7 +13,7 @@ import AcompanhamentosPedido from './components/acompanhamentos/AcompanhamentosP
 import Pedido from './components/Pedido/Pedido';
 
 export default props => (
-    <Router navigationBarStyle={{ backgroundColor: '#f46e41'}} titleStyle={{ color: '#fff' }} >
+    <Router navigationBarStyle={{ backgroundColor: '#f46e41'}} titleStyle={{ color: '#ffffff' }} >
         <Scene key="root">
             <Scene key='formLogin' component={FormLogin} title="Login" />
             <Scene key='formCadastro' component={FormCadastro} title="Cadastro" />

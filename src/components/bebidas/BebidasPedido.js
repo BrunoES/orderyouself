@@ -69,7 +69,7 @@ class BebidasPedido extends Component {
 
     render() {
         return (
-            <View style={{ flex: 1 }}>
+            <View style={{ flex: 1, backgroundColor: "#ffffff" }}>
                 <View style={{ flex: 0.4 }}>
                     <CategoriaBebidas />
                     <Bebidas />
@@ -77,6 +77,7 @@ class BebidasPedido extends Component {
                         value={this.props.quantidadeBebida}
                         onChangeText={text => this.props.modificaQuantidadeBebida(text) }
                         placeholder={"Quantidade"}
+                        style={{ marginHorizontal: 20, fontSize: 17 }}
                     />
                 </View>
                 <View style={{ flex: 0.5 }}>
