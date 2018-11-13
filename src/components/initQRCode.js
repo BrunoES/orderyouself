@@ -25,7 +25,7 @@ class InitQRCode extends Component {
                         onPress={ () => Actions.pratoPrincipal()}
                         title="Iniciar"
                         color="#841584"
-                        accessibilityLabel="Iniciar Processo de Pedido."
+                        accessibilityLabel="Iniciar Processo de Pedido"
                     />
             </View>
         );
