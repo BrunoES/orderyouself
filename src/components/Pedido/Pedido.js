@@ -124,7 +124,7 @@ class Pedido extends Component {
     }
 }
 
-mapStateToProps = state => {
+const mapStateToProps = state => {
     const refeicoes = _.map(state.ListaRefeicoesReducer, (val, uid) => {
         return { ...val, uid }
     });

@@ -37,10 +37,11 @@ import firebase from 'firebase';
 
 const usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
 const pedido = "b68cf9a9-c745-4752-95c2-8638732a94ce";
+const localId = "14212681-8d62-439a-bb02-b68ba32e21d5";
 
 export const categoriasFetch = () => {
     return dispatch => {
-        firebase.database().ref(`/categoriasPratos/${usuarioLogado}/`)
+        firebase.database().ref(`/categoriasPratos/${usuarioLogado}/${localId}/`)
             .on("value", snapshot => {
                 dispatch({ type: LISTA_CATEGORIAS, payload: snapshot.val() });
             })
@@ -49,7 +50,7 @@ export const categoriasFetch = () => {
 
 export const pratosFetch = (idCategoria) => {
     return dispatch => {
-        firebase.database().ref(`/pratos/${usuarioLogado}/${idCategoria}/`)
+        firebase.database().ref(`/pratos/${usuarioLogado}/${localId}/${idCategoria}/`)
             .on("value", snapshot => {
                 dispatch({ type: LISTA_PRATOS, payload: snapshot.val() });
             })
@@ -58,7 +59,7 @@ export const pratosFetch = (idCategoria) => {
 
 export const modificaCategoria = idCategoria => {
     return dispatch => {
-        firebase.database().ref(`/categoriasPratos/${usuarioLogado}/${idCategoria}/`)
+        firebase.database().ref(`/categoriasPratos/${usuarioLogado}/${localId}/${idCategoria}/`)
             .on("value", snapshot => {
                 dispatch({
                     type: MODIFICA_CATEGORIA,
@@ -80,7 +81,7 @@ export const modificaQuantidade = (quantidade) => {
 
 export const modificaPrato = (idPrato, idCategoria) => {
     return dispatch => {
-        firebase.database().ref(`/pratos/${usuarioLogado}/${idCategoria}/${idPrato}/`)
+        firebase.database().ref(`/pratos/${usuarioLogado}/${localId}/${idCategoria}/${idPrato}/`)
             .on("value", snapshot => {
                 dispatch({
                     type: MODIFICA_PRATO,
@@ -95,7 +96,7 @@ export const modificaPrato = (idPrato, idCategoria) => {
 
 export const adicionaRefeicao = (refeicao, pedidoAtual) => {
     return dispatch => {
-        firebase.database().ref(`/refeicoes/${usuarioLogado}/${pedidoAtual}/`)
+        firebase.database().ref(`/refeicoes/${usuarioLogado}/${localId}/${pedidoAtual}/`)
             .push(refeicao)
             .then(() => dispatch({
                 type: ADICIONA_REFEICAO,
@@ -110,7 +111,7 @@ export const adicionaRefeicao = (refeicao, pedidoAtual) => {
 
 export const removeRefeicao = (refeicaoId, pedidoAtual) => {
     return dispatch => {
-        firebase.database().ref(`/refeicoes/${usuarioLogado}/${pedidoAtual}/${refeicaoId}`)
+        firebase.database().ref(`/refeicoes/${usuarioLogado}/${localId}/${pedidoAtual}/${refeicaoId}`)
             .remove()
             .then(() => dispatch({
                 type: REMOVE_REFEICAO,
@@ -125,7 +126,7 @@ export const removeRefeicao = (refeicaoId, pedidoAtual) => {
 
 export const refeicoesFetch = (pedidoAtual) => {
     return dispatch => {
-        firebase.database().ref(`/refeicoes/${usuarioLogado}/${pedidoAtual}/`)
+        firebase.database().ref(`/refeicoes/${usuarioLogado}/${localId}/${pedidoAtual}/`)
             .on("value", snapshot => {
                 dispatch({ type: LISTA_REFEICOES, payload: snapshot.val() });
             })
@@ -136,7 +137,7 @@ export const refeicoesFetch = (pedidoAtual) => {
 
 export const categoriasBebidasFetch = () => {
     return dispatch => {
-        firebase.database().ref(`/categoriasBebidas/${usuarioLogado}/`)
+        firebase.database().ref(`/categoriasBebidas/${usuarioLogado}/${localId}/`)
             .on("value", snapshot => {
                 dispatch({ type: LISTA_CATEGORIASBEBIDAS, payload: snapshot.val() });
             })
@@ -145,7 +146,7 @@ export const categoriasBebidasFetch = () => {
 
 export const bebidasFetch = (bebidasCategoriaId) => {
     return dispatch => {
-        firebase.database().ref(`/bebidas/${usuarioLogado}/${bebidasCategoriaId}/`)
+        firebase.database().ref(`/bebidas/${usuarioLogado}/${localId}/${bebidasCategoriaId}/`)
             .on("value", snapshot => {
                 dispatch({ type: LISTA_BEBIDAS, payload: snapshot.val() });
             })
@@ -154,7 +155,7 @@ export const bebidasFetch = (bebidasCategoriaId) => {
 
 export const modificaCategoriaBebidas = bebidasCategoriaId => {
     return dispatch => {
-        firebase.database().ref(`/categoriasBebidas/${usuarioLogado}/${bebidasCategoriaId}/`)
+        firebase.database().ref(`/categoriasBebidas/${usuarioLogado}/${localId}/${bebidasCategoriaId}/`)
             .on("value", snapshot => {
                 dispatch({
                     type: MODIFICA_CATEGORIABEBIDAS,
@@ -176,7 +177,7 @@ export const modificaQuantidadeBebida = (quantidade) => {
 
 export const modificaBebida = (bebidaId, bebidasCategoriaId) => {
     return dispatch => {
-        firebase.database().ref(`/bebidas/${usuarioLogado}/${bebidasCategoriaId}/${bebidaId}/`)
+        firebase.database().ref(`/bebidas/${usuarioLogado}/${localId}/${bebidasCategoriaId}/${bebidaId}/`)
             .on("value", snapshot => {
                 dispatch({
                     type: MODIFICA_BEBIDA,
@@ -191,7 +192,7 @@ export const modificaBebida = (bebidaId, bebidasCategoriaId) => {
 
 export const adicionaBebida = (bebidaPedido, pedidoAtual) => {
     return dispatch => {
-        firebase.database().ref(`/bebidaspedido/${usuarioLogado}/${pedidoAtual}/`)
+        firebase.database().ref(`/bebidaspedido/${usuarioLogado}/${localId}/${pedidoAtual}/`)
             .push(bebidaPedido)
             .then(() => dispatch({
                 type: ADICIONA_BEBIDA,
@@ -206,7 +207,7 @@ export const adicionaBebida = (bebidaPedido, pedidoAtual) => {
 
 export const removeBebida = (bebidaId, pedidoAtual) => {
     return dispatch => {
-        firebase.database().ref(`/bebidaspedido/${usuarioLogado}/${pedidoAtual}/${bebidaId}`)
+        firebase.database().ref(`/bebidaspedido/${usuarioLogado}/${localId}/${pedidoAtual}/${bebidaId}`)
             .remove()
             .then(() => dispatch({
                 type: REMOVE_BEBIDA,
@@ -221,7 +222,7 @@ export const removeBebida = (bebidaId, pedidoAtual) => {
 
 export const bebidasPedidoFetch = (pedidoAtual) => {
     return dispatch => {
-        firebase.database().ref(`/bebidaspedido/${usuarioLogado}/${pedidoAtual}`)
+        firebase.database().ref(`/bebidaspedido/${usuarioLogado}/${localId}/${pedidoAtual}`)
             .on("value", snapshot => {
                 dispatch({ type: LISTA_BEBIDASPEDIDO, payload: snapshot.val() });
             })
@@ -232,7 +233,7 @@ export const bebidasPedidoFetch = (pedidoAtual) => {
 
 export const categoriasAcompanhamentosFetch = () => {
     return dispatch => {
-        firebase.database().ref(`/categoriasAcompanhamentos/${usuarioLogado}/`)
+        firebase.database().ref(`/categoriasAcompanhamentos/${usuarioLogado}/${localId}/`)
             .on("value", snapshot => {
                 dispatch({ type: LISTA_CATEGORIASACOMPANHAMENTOS, payload: snapshot.val() });
             })
@@ -241,7 +242,7 @@ export const categoriasAcompanhamentosFetch = () => {
 
 export const acompanhamentosFetch = (acompanhamentosCategoriaId) => {
     return dispatch => {
-        firebase.database().ref(`/acompanhamentos/${usuarioLogado}/${acompanhamentosCategoriaId}/`)
+        firebase.database().ref(`/acompanhamentos/${usuarioLogado}/${localId}/${acompanhamentosCategoriaId}/`)
             .on("value", snapshot => {
                 dispatch({ type: LISTA_ACOMPANHAMENTOS, payload: snapshot.val() });
             })
@@ -250,7 +251,7 @@ export const acompanhamentosFetch = (acompanhamentosCategoriaId) => {
 
 export const modificaCategoriaAcompanhamentos = acompanhamentosCategoriaId => {
     return dispatch => {
-        firebase.database().ref(`/categoriasAcompanhamentos/${usuarioLogado}/${acompanhamentosCategoriaId}/`)
+        firebase.database().ref(`/categoriasAcompanhamentos/${usuarioLogado}/${localId}/${acompanhamentosCategoriaId}/`)
             .on("value", snapshot => {
                 dispatch({
                     type: MODIFICA_CATEGORIAACOMPANHAMENTOS,
@@ -272,7 +273,7 @@ export const modificaQuantidadeAcompanhamento = (quantidade) => {
 
 export const modificaAcompanhamento = (acompanhamentoId, acompanhamentosCategoriaId) => {
     return dispatch => {
-        firebase.database().ref(`/acompanhamentos/${usuarioLogado}/${acompanhamentosCategoriaId}/${acompanhamentoId}/`)
+        firebase.database().ref(`/acompanhamentos/${usuarioLogado}/${localId}/${acompanhamentosCategoriaId}/${acompanhamentoId}/`)
             .on("value", snapshot => {
                 dispatch({
                     type: MODIFICA_ACOMPANHAMENTO,
@@ -287,7 +288,7 @@ export const modificaAcompanhamento = (acompanhamentoId, acompanhamentosCategori
 
 export const adicionaAcompanhamento = (acompanhamentoPedido, pedidoAtual) => {
     return dispatch => {
-        firebase.database().ref(`/acompanhamentosPedido/${usuarioLogado}/${pedidoAtual}/`)
+        firebase.database().ref(`/acompanhamentosPedido/${usuarioLogado}/${localId}/${pedidoAtual}/`)
             .push(acompanhamentoPedido)
             .then(() => dispatch({
                 type: ADICIONA_ACOMPANHAMENTO,
@@ -302,7 +303,7 @@ export const adicionaAcompanhamento = (acompanhamentoPedido, pedidoAtual) => {
 
 export const removeAcompanhamento = (acompanhamentoId, pedidoAtual) => {
     return dispatch => {
-        firebase.database().ref(`/acompanhamentosPedido/${usuarioLogado}/${pedidoAtual}/${acompanhamentoId}`)
+        firebase.database().ref(`/acompanhamentosPedido/${usuarioLogado}/${localId}/${pedidoAtual}/${acompanhamentoId}`)
             .remove()
             .then(() => dispatch({
                 type: REMOVE_ACOMPANHAMENTO,
@@ -317,7 +318,7 @@ export const removeAcompanhamento = (acompanhamentoId, pedidoAtual) => {
 
 export const acompanhamentosPedidoFetch = (pedidoAtual) => {
     return dispatch => {
-        firebase.database().ref(`/acompanhamentosPedido/${usuarioLogado}/${pedidoAtual}/`)
+        firebase.database().ref(`/acompanhamentosPedido/${usuarioLogado}/${localId}/${pedidoAtual}/`)
             .on("value", snapshot => {
                 dispatch({ type: LISTA_ACOMPANHAMENTOSPEDIDO, payload: snapshot.val() });
             })
@@ -325,15 +326,16 @@ export const acompanhamentosPedidoFetch = (pedidoAtual) => {
 }
 
 /* --------------------------------------------------------------------------------------------------- */
+/*
 export const buscaPedidoAtual = () => {
     return dispatch => {
-        const pedidoId = firebase.database().ref(`/pedidos/${usuarioLogado}/`).orderByChild("status").equalTo("opened");
+        const pedidoId = firebase.database().ref(`/pedidos/${usuarioLogado}/${localId}/`).orderByChild("status").equalTo("opened");
     };
 }
-
+*/
 export const getCurrentOrder = () => {
     return dispatch => {
-        firebase.database().ref(`/pedidoAtual/${usuarioLogado}/`)
+        firebase.database().ref(`/pedidoAtual/${usuarioLogado}/${localId}/`)
             .on("value", snapshot => {
                 dispatch({ type: RECUPERA_PEDIDO_ATUAL, payload: snapshot.val() });
             })
@@ -342,9 +344,9 @@ export const getCurrentOrder = () => {
 
 export const criaNovoPedido = () => {
     return dispatch => {
-        const pedidoId = firebase.database().ref(`/pedidoAtual/${usuarioLogado}/`).push({ 'desc': 'PedidoAtual' }).key;
+        const pedidoId = firebase.database().ref(`/pedidoAtual/${usuarioLogado}/${localId}/`).push({ 'desc': 'PedidoAtual' }).key;
         if(pedidoId !== ''){
-            firebase.database().ref(`/pedidos/${usuarioLogado}/`).child(pedidoId).set({ 'status': 'opened' });
+            firebase.database().ref(`/pedidos/${usuarioLogado}/${localId}/`).child(pedidoId).set({ 'status': 'opened' });
         }
         dispatch({
             type: CRIA_NOVO_PEDIDO,
@@ -367,7 +369,7 @@ export const criaNovoPedido = () => {
 
 export const deletaPedidoAtual = (pedidoAtual) => {
     return dispatch => {
-        firebase.database().ref(`/pedidoAtual/${usuarioLogado}/${pedidoAtual}/`)
+        firebase.database().ref(`/pedidoAtual/${usuarioLogado}/${localId}/${pedidoAtual}/`)
             .remove()
             .then(() => dispatch({
                 type: REMOVE_PEDIDO_ATUAL,
@@ -382,7 +384,7 @@ export const deletaPedidoAtual = (pedidoAtual) => {
 
 export const cancelaPedido = (pedidoAtual) => {
     return dispatch => {
-        firebase.database().ref(`/pedidos/${usuarioLogado}/${pedidoAtual}/`)
+        firebase.database().ref(`/pedidos/${usuarioLogado}/${localId}/${pedidoAtual}/`)
             .update({ 'status': 'canceled' })
             .then(() => dispatch({
                 type: CANCELA_PEDIDO,
@@ -397,7 +399,7 @@ export const cancelaPedido = (pedidoAtual) => {
 
 export const confirmaPedido = (pedidoAtual) => {
     return dispatch => {
-        firebase.database().ref(`/pedidos/${usuarioLogado}/${pedidoAtual}/`)
+        firebase.database().ref(`/pedidos/${usuarioLogado}/${localId}/${pedidoAtual}/`)
             .update({ 'status': 'confirmed' })
             .then(() => dispatch({
                 type: CONFIRMA_PEDIDO,
