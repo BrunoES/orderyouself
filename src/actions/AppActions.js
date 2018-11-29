@@ -37,11 +37,11 @@ import firebase from 'firebase';
 
 const usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
 const pedido = "b68cf9a9-c745-4752-95c2-8638732a94ce";
-const localId = "14212681-8d62-439a-bb02-b68ba32e21d5";
+const localId = "NMajCK3oEvhj2XhyCzbf2bxj73H3";
 
 export const categoriasFetch = () => {
     return dispatch => {
-        firebase.database().ref(`/categoriasPratos/${usuarioLogado}/${localId}/`)
+        firebase.database().ref(`/categoriasPratos/${localId}/`)
             .on("value", snapshot => {
                 dispatch({ type: LISTA_CATEGORIAS, payload: snapshot.val() });
             })
@@ -50,7 +50,7 @@ export const categoriasFetch = () => {
 
 export const pratosFetch = (idCategoria) => {
     return dispatch => {
-        firebase.database().ref(`/pratos/${usuarioLogado}/${localId}/${idCategoria}/`)
+        firebase.database().ref(`/pratos/${localId}/${idCategoria}/`)
             .on("value", snapshot => {
                 dispatch({ type: LISTA_PRATOS, payload: snapshot.val() });
             })
@@ -59,7 +59,7 @@ export const pratosFetch = (idCategoria) => {
 
 export const modificaCategoria = idCategoria => {
     return dispatch => {
-        firebase.database().ref(`/categoriasPratos/${usuarioLogado}/${localId}/${idCategoria}/`)
+        firebase.database().ref(`/categoriasPratos/${localId}/${idCategoria}/`)
             .on("value", snapshot => {
                 dispatch({
                     type: MODIFICA_CATEGORIA,
@@ -81,7 +81,7 @@ export const modificaQuantidade = (quantidade) => {
 
 export const modificaPrato = (idPrato, idCategoria) => {
     return dispatch => {
-        firebase.database().ref(`/pratos/${usuarioLogado}/${localId}/${idCategoria}/${idPrato}/`)
+        firebase.database().ref(`/pratos/${localId}/${idCategoria}/${idPrato}/`)
             .on("value", snapshot => {
                 dispatch({
                     type: MODIFICA_PRATO,
@@ -137,7 +137,7 @@ export const refeicoesFetch = (pedidoAtual) => {
 
 export const categoriasBebidasFetch = () => {
     return dispatch => {
-        firebase.database().ref(`/categoriasBebidas/${usuarioLogado}/${localId}/`)
+        firebase.database().ref(`/categoriasBebidas/${localId}/`)
             .on("value", snapshot => {
                 dispatch({ type: LISTA_CATEGORIASBEBIDAS, payload: snapshot.val() });
             })
@@ -146,7 +146,7 @@ export const categoriasBebidasFetch = () => {
 
 export const bebidasFetch = (bebidasCategoriaId) => {
     return dispatch => {
-        firebase.database().ref(`/bebidas/${usuarioLogado}/${localId}/${bebidasCategoriaId}/`)
+        firebase.database().ref(`/bebidas/${localId}/${bebidasCategoriaId}/`)
             .on("value", snapshot => {
                 dispatch({ type: LISTA_BEBIDAS, payload: snapshot.val() });
             })
@@ -155,7 +155,7 @@ export const bebidasFetch = (bebidasCategoriaId) => {
 
 export const modificaCategoriaBebidas = bebidasCategoriaId => {
     return dispatch => {
-        firebase.database().ref(`/categoriasBebidas/${usuarioLogado}/${localId}/${bebidasCategoriaId}/`)
+        firebase.database().ref(`/categoriasBebidas/${localId}/${bebidasCategoriaId}/`)
             .on("value", snapshot => {
                 dispatch({
                     type: MODIFICA_CATEGORIABEBIDAS,
@@ -177,7 +177,7 @@ export const modificaQuantidadeBebida = (quantidade) => {
 
 export const modificaBebida = (bebidaId, bebidasCategoriaId) => {
     return dispatch => {
-        firebase.database().ref(`/bebidas/${usuarioLogado}/${localId}/${bebidasCategoriaId}/${bebidaId}/`)
+        firebase.database().ref(`/bebidas/${localId}/${bebidasCategoriaId}/${bebidaId}/`)
             .on("value", snapshot => {
                 dispatch({
                     type: MODIFICA_BEBIDA,
@@ -233,7 +233,7 @@ export const bebidasPedidoFetch = (pedidoAtual) => {
 
 export const categoriasAcompanhamentosFetch = () => {
     return dispatch => {
-        firebase.database().ref(`/categoriasAcompanhamentos/${usuarioLogado}/${localId}/`)
+        firebase.database().ref(`/categoriasAcompanhamentos/${localId}/`)
             .on("value", snapshot => {
                 dispatch({ type: LISTA_CATEGORIASACOMPANHAMENTOS, payload: snapshot.val() });
             })
@@ -242,7 +242,7 @@ export const categoriasAcompanhamentosFetch = () => {
 
 export const acompanhamentosFetch = (acompanhamentosCategoriaId) => {
     return dispatch => {
-        firebase.database().ref(`/acompanhamentos/${usuarioLogado}/${localId}/${acompanhamentosCategoriaId}/`)
+        firebase.database().ref(`/acompanhamentos/${localId}/${acompanhamentosCategoriaId}/`)
             .on("value", snapshot => {
                 dispatch({ type: LISTA_ACOMPANHAMENTOS, payload: snapshot.val() });
             })
@@ -251,7 +251,7 @@ export const acompanhamentosFetch = (acompanhamentosCategoriaId) => {
 
 export const modificaCategoriaAcompanhamentos = acompanhamentosCategoriaId => {
     return dispatch => {
-        firebase.database().ref(`/categoriasAcompanhamentos/${usuarioLogado}/${localId}/${acompanhamentosCategoriaId}/`)
+        firebase.database().ref(`/categoriasAcompanhamentos/${localId}/${acompanhamentosCategoriaId}/`)
             .on("value", snapshot => {
                 dispatch({
                     type: MODIFICA_CATEGORIAACOMPANHAMENTOS,
@@ -273,7 +273,7 @@ export const modificaQuantidadeAcompanhamento = (quantidade) => {
 
 export const modificaAcompanhamento = (acompanhamentoId, acompanhamentosCategoriaId) => {
     return dispatch => {
-        firebase.database().ref(`/acompanhamentos/${usuarioLogado}/${localId}/${acompanhamentosCategoriaId}/${acompanhamentoId}/`)
+        firebase.database().ref(`/acompanhamentos/${localId}/${acompanhamentosCategoriaId}/${acompanhamentoId}/`)
             .on("value", snapshot => {
                 dispatch({
                     type: MODIFICA_ACOMPANHAMENTO,
