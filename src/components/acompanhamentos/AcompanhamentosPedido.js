@@ -113,6 +113,7 @@ class AcompanhamentosPedido extends Component {
 }
 
 mapStateToProps = state => {
+    const localId = state.initQRCodeReducer.localId;
     const categoriaAcompanhamentos = state.AppReducer.categoriaAcompanhamentos;
     const acompanhamento = state.AppReducer.acompanhamento;
     const quantidadeAcompanhamento = state.AppReducer.quantidadeAcompanhamento;
@@ -125,7 +126,7 @@ mapStateToProps = state => {
         return { ...val, uid }
     });
     
-    return { acompanhamentos, categoriaAcompanhamentos, acompanhamento, quantidadeAcompanhamento, pedidoAtual };
+    return { localId, acompanhamentos, categoriaAcompanhamentos, acompanhamento, quantidadeAcompanhamento, pedidoAtual };
 }
 
 export default connect(mapStateToProps, { modificaQuantidadeAcompanhamento, adicionaAcompanhamento, removeAcompanhamento, acompanhamentosPedidoFetch })(AcompanhamentosPedido);

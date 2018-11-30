@@ -29,7 +29,9 @@ import {
     CONFIRMA_PEDIDO,
     CRIA_NOVO_PEDIDO,
     RECUPERA_PEDIDO_ATUAL,
-    REMOVE_PEDIDO_ATUAL
+    REMOVE_PEDIDO_ATUAL,
+
+    UID_LOCAL
 } from './types';
 
 import _ from 'lodash';
@@ -409,5 +411,13 @@ export const confirmaPedido = (pedidoAtual) => {
                 type: CONFIRMA_PEDIDO,
                 payload: ''
             }))
+    };
+}
+
+/* --------------------------------------------------------------------------------------------------- */
+export const setUidLocal = (localId) => {
+    return {
+        type: UID_LOCAL,
+        payload: localId
     };
 }

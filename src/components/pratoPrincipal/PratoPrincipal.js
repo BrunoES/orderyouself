@@ -112,6 +112,7 @@ class PratoPrincipal extends Component {
 }
 
 mapStateToProps = state => {
+    const localId = state.initQRCodeReducer.localId;
     const categoria = state.AppReducer.categoria;
     const prato = state.AppReducer.prato;
     const quantidade = state.AppReducer.quantidade;
@@ -124,7 +125,7 @@ mapStateToProps = state => {
         return { ...val, uid }
     });
 
-    return { refeicoes, categoria, prato, quantidade, pedidoAtual };
+    return { localId, refeicoes, categoria, prato, quantidade, pedidoAtual };
 }
 
 export default connect(mapStateToProps, { modificaQuantidade, adicionaRefeicao, removeRefeicao, refeicoesFetch, getCurrentOrder })(PratoPrincipal);

@@ -112,6 +112,7 @@ class BebidasPedido extends Component {
 }
 
 mapStateToProps = state => {
+    const localId = state.initQRCodeReducer.localId;
     const categoriaBebidas = state.AppReducer.categoriaBebidas;
     const bebida = state.AppReducer.bebida;
     const quantidadeBebida = state.AppReducer.quantidadeBebida;
@@ -124,7 +125,7 @@ mapStateToProps = state => {
         return { ...val, uid }
     });
     
-    return { bebidas, categoriaBebidas, bebida, quantidadeBebida, pedidoAtual };
+    return { localId, bebidas, categoriaBebidas, bebida, quantidadeBebida, pedidoAtual };
 }
 
 export default connect(mapStateToProps, { modificaQuantidadeBebida, adicionaBebida, removeBebida, bebidasPedidoFetch })(BebidasPedido);

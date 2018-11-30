@@ -3,7 +3,7 @@ import { View, Text,  Button, StyleSheet, TouchableOpacity } from 'react-native'
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 
-import {  getCurrentOrder } from '../actions/AppActions';
+import {  getCurrentOrder, setUidLocal } from '../actions/AppActions';
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
 
@@ -11,14 +11,23 @@ import _ from 'lodash';
 
 class InitQRCode extends Component {
 
+    /*
     onSuccess(e) {
         alert("Success");
         console.log(e);
-        /*
         Linking
           .openURL(e.data)
           .catch(err => console.error('An error occured', err));
-        */
+    }
+    */
+
+    onSuccess(e) {
+        alert("Success");
+        let data = e.data;
+        // Codigo Local | Mesa
+        data = "NMajCK3oEvhj2XhyCzbf2bxj73H3|1";
+        this.props.setUidLocal(data.split("|")[0]);
+        Actions.pratoPrincipal();
     }
 
     constructor(props){
@@ -34,7 +43,7 @@ class InitQRCode extends Component {
         return (
             <View style={{ flex: 1, backgroundColor: "#ffffff" }}>
                 <Button
-                    onPress={ () => Actions.pratoPrincipal()}
+                    onPress={ () => this.onSuccess({})}
                     title="Iniciar"
                     color="#841584"
                     accessibilityLabel="Iniciar Processo de Pedido"
@@ -85,4 +94,4 @@ mapStateToProps = state => {
     return { pedidoAtual };
 }
 
-export default connect(mapStateToProps, { getCurrentOrder })(InitQRCode);
+export default connect(mapStateToProps, { getCurrentOrder, setUidLocal })(InitQRCode);
