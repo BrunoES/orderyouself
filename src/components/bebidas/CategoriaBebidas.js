@@ -7,7 +7,7 @@ import { categoriasBebidasFetch, modificaCategoriaBebidas } from '../../actions/
 class CategoriaBebidas extends Component {
     
     componentWillMount() {
-       this.props.categoriasBebidasFetch();
+       this.props.categoriasBebidasFetch(this.props.localId);
     }
 
     _renderItems(categoriasBebidas) {
@@ -26,7 +26,7 @@ class CategoriaBebidas extends Component {
                 <Picker
                     selectedValue={this.props.categoriaBebidas.id}
                     style={{ height: 50, marginLeft: 12 }}
-                    onValueChange={(value) => this.props.modificaCategoriaBebidas(value)}>
+                    onValueChange={(value) => this.props.modificaCategoriaBebidas(value, this.props.localId)}>
                     <Picker.Item label="Selecione uma categoria" value="0" />
                     {this._renderItems(this.props.categoriasBebidas)}
                 </Picker>
@@ -36,12 +36,14 @@ class CategoriaBebidas extends Component {
 }
 
 mapStateToProps = state => {
+    const localId = state.initQRCodeReducer.localId;
     const categoriasBebidas = _.map(state.ListaCategoriasBebidasReducer, (val, uid) => {
         let desc = val.desc;
         return { desc, uid };
     });
     const categoriaBebidas = state.AppReducer.categoriaBebidas;
-    return { categoriasBebidas, categoriaBebidas };
+    console.log(localId);
+    return { localId, categoriasBebidas, categoriaBebidas };
 }
 
 export default connect(mapStateToProps, { categoriasBebidasFetch, modificaCategoriaBebidas })(CategoriaBebidas);

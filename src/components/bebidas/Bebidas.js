@@ -8,13 +8,13 @@ class Bebidas extends Component {
     
     componentWillMount() {
         if(this.props.categoriaBebidas.id != ''){
-            this.props.bebidasFetch(this.props.categoriaBebidas.id);
+            this.props.bebidasFetch(this.props.categoriaBebidas.id, this.props.localId);
         }
     }
 
     componentWillReceiveProps(nextProps) {
         if(this.props.categoriaBebidas.id != nextProps.categoriaBebidas.id){
-            this.props.bebidasFetch(nextProps.categoriaBebidas.id);
+            this.props.bebidasFetch(nextProps.categoriaBebidas.id, this.props.localId);
         }
     }
 
@@ -34,7 +34,7 @@ class Bebidas extends Component {
                 <Picker
                     selectedValue={this.props.bebida.id}
                     style={{ height: 50, marginLeft: 12 }}
-                    onValueChange={(value) => this.props.modificaBebida(value, this.props.categoriaBebidas.id)}>
+                    onValueChange={(value) => this.props.modificaBebida(value, this.props.categoriaBebidas.id, this.props.localId)}>
                     <Picker.Item label="Selecione um prato" value="0" />
                     {this._renderItems(this.props.bebidas)}
                 </Picker>
@@ -44,6 +44,7 @@ class Bebidas extends Component {
 }
 
 mapStateToProps = state => {
+    const localId = state.initQRCodeReducer.localId;
     const bebidas = _.map(state.ListaBebidasReducer, (val, uid) => {
         let desc = val.desc;
         return { desc, uid };
@@ -51,7 +52,7 @@ mapStateToProps = state => {
     const categoriaBebidas = state.AppReducer.categoriaBebidas;
     const bebida = state.AppReducer.bebida;
 
-    return { bebidas, bebida, categoriaBebidas };
+    return { localId, bebidas, bebida, categoriaBebidas };
 }
 
 export default connect(mapStateToProps, { bebidasFetch, modificaBebida })(Bebidas);

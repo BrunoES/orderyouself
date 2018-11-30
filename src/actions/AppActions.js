@@ -39,9 +39,9 @@ import firebase from 'firebase';
 
 const usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
 const pedido = "b68cf9a9-c745-4752-95c2-8638732a94ce";
-const localId = "NMajCK3oEvhj2XhyCzbf2bxj73H3";
+const localId = "NMajCK3oEvhj2XhyCzbf2bxj73H3_XXX";
 
-export const categoriasFetch = () => {
+export const categoriasFetch = (localId) => {
     return dispatch => {
         firebase.database().ref(`/categoriasPratos/${localId}/`)
             .on("value", snapshot => {
@@ -50,7 +50,7 @@ export const categoriasFetch = () => {
     }
 }
 
-export const pratosFetch = (idCategoria) => {
+export const pratosFetch = (idCategoria, localId) => {
     return dispatch => {
         firebase.database().ref(`/pratos/${localId}/${idCategoria}/`)
             .on("value", snapshot => {
@@ -59,7 +59,7 @@ export const pratosFetch = (idCategoria) => {
     }
 }
 
-export const modificaCategoria = idCategoria => {
+export const modificaCategoria = (idCategoria, localId) => {
     return dispatch => {
         firebase.database().ref(`/categoriasPratos/${localId}/${idCategoria}/`)
             .on("value", snapshot => {
@@ -81,7 +81,7 @@ export const modificaQuantidade = (quantidade) => {
     };
 }
 
-export const modificaPrato = (idPrato, idCategoria) => {
+export const modificaPrato = (idPrato, idCategoria, localId) => {
     return dispatch => {
         firebase.database().ref(`/pratos/${localId}/${idCategoria}/${idPrato}/`)
             .on("value", snapshot => {
@@ -96,7 +96,7 @@ export const modificaPrato = (idPrato, idCategoria) => {
     }
 }
 
-export const adicionaRefeicao = (refeicao, pedidoAtual) => {
+export const adicionaRefeicao = (refeicao, pedidoAtual, localId) => {
     return dispatch => {
         firebase.database().ref(`/refeicoes/${usuarioLogado}/${localId}/${pedidoAtual}/`)
             .push(refeicao)
@@ -111,7 +111,7 @@ export const adicionaRefeicao = (refeicao, pedidoAtual) => {
     };
 }
 
-export const removeRefeicao = (refeicaoId, pedidoAtual) => {
+export const removeRefeicao = (refeicaoId, pedidoAtual, localId) => {
     return dispatch => {
         firebase.database().ref(`/refeicoes/${usuarioLogado}/${localId}/${pedidoAtual}/${refeicaoId}`)
             .remove()
@@ -126,7 +126,7 @@ export const removeRefeicao = (refeicaoId, pedidoAtual) => {
     };
 }
 
-export const refeicoesFetch = (pedidoAtual) => {
+export const refeicoesFetch = (pedidoAtual, localId) => {
     return dispatch => {
         firebase.database().ref(`/refeicoes/${usuarioLogado}/${localId}/${pedidoAtual}/`)
             .on("value", snapshot => {
@@ -137,7 +137,7 @@ export const refeicoesFetch = (pedidoAtual) => {
 
 /* --------------------------------------------------------------------------------------------------- */
 
-export const categoriasBebidasFetch = () => {
+export const categoriasBebidasFetch = (localId) => {
     return dispatch => {
         firebase.database().ref(`/categoriasBebidas/${localId}/`)
             .on("value", snapshot => {
@@ -146,7 +146,7 @@ export const categoriasBebidasFetch = () => {
     }
 }
 
-export const bebidasFetch = (bebidasCategoriaId) => {
+export const bebidasFetch = (bebidasCategoriaId, localId) => {
     return dispatch => {
         firebase.database().ref(`/bebidas/${localId}/${bebidasCategoriaId}/`)
             .on("value", snapshot => {
@@ -155,7 +155,7 @@ export const bebidasFetch = (bebidasCategoriaId) => {
     }
 }
 
-export const modificaCategoriaBebidas = bebidasCategoriaId => {
+export const modificaCategoriaBebidas = (bebidasCategoriaId, localId) => {
     return dispatch => {
         firebase.database().ref(`/categoriasBebidas/${localId}/${bebidasCategoriaId}/`)
             .on("value", snapshot => {
@@ -177,7 +177,7 @@ export const modificaQuantidadeBebida = (quantidade) => {
     };
 }
 
-export const modificaBebida = (bebidaId, bebidasCategoriaId) => {
+export const modificaBebida = (bebidaId, bebidasCategoriaId, localId) => {
     return dispatch => {
         firebase.database().ref(`/bebidas/${localId}/${bebidasCategoriaId}/${bebidaId}/`)
             .on("value", snapshot => {
@@ -192,7 +192,7 @@ export const modificaBebida = (bebidaId, bebidasCategoriaId) => {
     }
 }
 
-export const adicionaBebida = (bebidaPedido, pedidoAtual) => {
+export const adicionaBebida = (bebidaPedido, pedidoAtual, localId) => {
     return dispatch => {
         firebase.database().ref(`/bebidaspedido/${usuarioLogado}/${localId}/${pedidoAtual}/`)
             .push(bebidaPedido)
@@ -207,7 +207,7 @@ export const adicionaBebida = (bebidaPedido, pedidoAtual) => {
     };
 }
 
-export const removeBebida = (bebidaId, pedidoAtual) => {
+export const removeBebida = (bebidaId, pedidoAtual, localId) => {
     return dispatch => {
         firebase.database().ref(`/bebidaspedido/${usuarioLogado}/${localId}/${pedidoAtual}/${bebidaId}`)
             .remove()
@@ -222,7 +222,7 @@ export const removeBebida = (bebidaId, pedidoAtual) => {
     };
 }
 
-export const bebidasPedidoFetch = (pedidoAtual) => {
+export const bebidasPedidoFetch = (pedidoAtual, localId) => {
     return dispatch => {
         firebase.database().ref(`/bebidaspedido/${usuarioLogado}/${localId}/${pedidoAtual}`)
             .on("value", snapshot => {
@@ -233,7 +233,7 @@ export const bebidasPedidoFetch = (pedidoAtual) => {
 
 /* --------------------------------------------------------------------------------------------------- */
 
-export const categoriasAcompanhamentosFetch = () => {
+export const categoriasAcompanhamentosFetch = (localId) => {
     return dispatch => {
         firebase.database().ref(`/categoriasAcompanhamentos/${localId}/`)
             .on("value", snapshot => {
@@ -242,7 +242,7 @@ export const categoriasAcompanhamentosFetch = () => {
     }
 }
 
-export const acompanhamentosFetch = (acompanhamentosCategoriaId) => {
+export const acompanhamentosFetch = (acompanhamentosCategoriaId, localId) => {
     return dispatch => {
         firebase.database().ref(`/acompanhamentos/${localId}/${acompanhamentosCategoriaId}/`)
             .on("value", snapshot => {
@@ -251,7 +251,7 @@ export const acompanhamentosFetch = (acompanhamentosCategoriaId) => {
     }
 }
 
-export const modificaCategoriaAcompanhamentos = acompanhamentosCategoriaId => {
+export const modificaCategoriaAcompanhamentos = (acompanhamentosCategoriaId, localId) => {
     return dispatch => {
         firebase.database().ref(`/categoriasAcompanhamentos/${localId}/${acompanhamentosCategoriaId}/`)
             .on("value", snapshot => {
@@ -273,7 +273,7 @@ export const modificaQuantidadeAcompanhamento = (quantidade) => {
     };
 }
 
-export const modificaAcompanhamento = (acompanhamentoId, acompanhamentosCategoriaId) => {
+export const modificaAcompanhamento = (acompanhamentoId, acompanhamentosCategoriaId, localId) => {
     return dispatch => {
         firebase.database().ref(`/acompanhamentos/${localId}/${acompanhamentosCategoriaId}/${acompanhamentoId}/`)
             .on("value", snapshot => {
@@ -288,7 +288,7 @@ export const modificaAcompanhamento = (acompanhamentoId, acompanhamentosCategori
     }
 }
 
-export const adicionaAcompanhamento = (acompanhamentoPedido, pedidoAtual) => {
+export const adicionaAcompanhamento = (acompanhamentoPedido, pedidoAtual, localId) => {
     return dispatch => {
         firebase.database().ref(`/acompanhamentosPedido/${usuarioLogado}/${localId}/${pedidoAtual}/`)
             .push(acompanhamentoPedido)
@@ -303,7 +303,7 @@ export const adicionaAcompanhamento = (acompanhamentoPedido, pedidoAtual) => {
     };
 }
 
-export const removeAcompanhamento = (acompanhamentoId, pedidoAtual) => {
+export const removeAcompanhamento = (acompanhamentoId, pedidoAtual, localId) => {
     return dispatch => {
         firebase.database().ref(`/acompanhamentosPedido/${usuarioLogado}/${localId}/${pedidoAtual}/${acompanhamentoId}`)
             .remove()
@@ -318,7 +318,7 @@ export const removeAcompanhamento = (acompanhamentoId, pedidoAtual) => {
     };
 }
 
-export const acompanhamentosPedidoFetch = (pedidoAtual) => {
+export const acompanhamentosPedidoFetch = (pedidoAtual, localId) => {
     return dispatch => {
         firebase.database().ref(`/acompanhamentosPedido/${usuarioLogado}/${localId}/${pedidoAtual}/`)
             .on("value", snapshot => {

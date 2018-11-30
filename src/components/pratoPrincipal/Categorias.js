@@ -7,7 +7,7 @@ import { categoriasFetch, modificaCategoria } from '../../actions/AppActions'
 class Categorias extends Component {
     
     componentWillMount() {
-       this.props.categoriasFetch();
+       this.props.categoriasFetch(this.props.localId);
     }
 
     _renderItems(categorias) {
@@ -26,7 +26,7 @@ class Categorias extends Component {
                 <Picker
                     selectedValue={this.props.categoria.id}
                     style={{ height: 50, marginLeft: 12 }}
-                    onValueChange={(value) => this.props.modificaCategoria(value)}>
+                    onValueChange={(value) => this.props.modificaCategoria(value, this.props.localId)}>
                     <Picker.Item label="Selecione uma categoria" value="0" />
                     {this._renderItems(this.props.categorias)}
                 </Picker>
@@ -36,12 +36,13 @@ class Categorias extends Component {
 }
 
 mapStateToProps = state => {
+    const localId = state.initQRCodeReducer.localId;
     const categorias = _.map(state.ListaCategoriasReducer, (val, uid) => {
         let desc = val.desc;
         return { desc, uid };
     });
     const categoria = state.AppReducer.categoria;
-    return { categorias, categoria };
+    return { localId, categorias, categoria };
 }
 
 export default connect(mapStateToProps, { categoriasFetch, modificaCategoria })(Categorias);

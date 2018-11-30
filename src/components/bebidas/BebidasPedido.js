@@ -18,13 +18,13 @@ class BebidasPedido extends Component {
     }
 
     componentWillMount() {
-        this.props.bebidasPedidoFetch(this.props.pedidoAtual);
+        this.props.bebidasPedidoFetch(this.props.pedidoAtual, this.props.localId);
         this.criaFonteDeDados(this.props.bebidas);
     }
 
     componentWillReceiveProps(nextProps) {
         if(this.props.bebidas.length != nextProps.bebidas.length){
-            this.props.bebidasPedidoFetch(this.props.pedidoAtual);
+            this.props.bebidasPedidoFetch(this.props.pedidoAtual, this.props.localId);
         }
         this.criaFonteDeDados(nextProps.bebidas);
     }
@@ -47,14 +47,15 @@ class BebidasPedido extends Component {
                 desc: this.props.bebida.descricao,
                 quantidade: this.props.quantidadeBebida
             },
-            this.props.pedidoAtual);
+            this.props.pedidoAtual,
+            this.props.localId);
         } else {
             alert("Por favor, informe a Categoria, Prato, e Quantidade.");
         }
     }
 
     _removeBebida(bebidaId) {
-        this.props.removeBebida(bebidaId, this.props.pedidoAtual);
+        this.props.removeBebida(bebidaId, this.props.pedidoAtual, this.props.localId);
     }
 
     _renderRow(item) {

@@ -8,9 +8,11 @@ import MyListItem from './../MyListItem';
 class Pedido extends Component {
     
     componentWillMount() {
+       /*
        this.props.refeicoesFetch();
        this.props.acompanhamentosPedidoFetch();
        this.props.bebidasPedidoFetch();
+       */
        this.buildDataSourceRefeicoes(this.props.refeicoes);
        this.buildDataSourceAcompanhamentos(this.props.acompanhamentos);
        this.buildDataSourceBebidas(this.props.bebidas);
@@ -125,6 +127,8 @@ class Pedido extends Component {
 }
 
 const mapStateToProps = state => {
+    const localId = state.initQRCodeReducer.localId;
+
     const refeicoes = _.map(state.ListaRefeicoesReducer, (val, uid) => {
         return { ...val, uid }
     });
@@ -141,7 +145,7 @@ const mapStateToProps = state => {
         return { ...val, uid }
     });
 
-    return { refeicoes, acompanhamentos, bebidas, pedidoAtual };
+    return { localId, refeicoes, acompanhamentos, bebidas, pedidoAtual };
 }
 
 export default connect(mapStateToProps, { refeicoesFetch, acompanhamentosPedidoFetch, bebidasPedidoFetch, cancelaPedido, confirmaPedido, criaNovoPedido, buscaPedidoAtual, deletaPedidoAtual })(Pedido);

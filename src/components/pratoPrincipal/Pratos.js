@@ -8,13 +8,13 @@ class Pratos extends Component {
     
     componentWillMount() {
         if(this.props.categoria.id != ''){
-            this.props.pratosFetch(this.props.categoria.id);
+            this.props.pratosFetch(this.props.categoria.id, this.props.localId);
         }
     }
 
     componentWillReceiveProps(nextProps) {
         if(this.props.categoria.id != nextProps.categoria.id){
-            this.props.pratosFetch(nextProps.categoria.id);
+            this.props.pratosFetch(nextProps.categoria.id, this.props.localId);
         }
     }
 
@@ -34,7 +34,7 @@ class Pratos extends Component {
                 <Picker
                     selectedValue={this.props.prato.id}
                     style={{ height: 50, marginLeft: 12 }}
-                    onValueChange={(value) => this.props.modificaPrato(value, this.props.categoria.id)}>
+                    onValueChange={(value) => this.props.modificaPrato(value, this.props.categoria.id, this.props.localId)}>
                     <Picker.Item label="Selecione um prato" value="0" />
                     {this._renderItems(this.props.pratos)}
                 </Picker>
@@ -44,6 +44,7 @@ class Pratos extends Component {
 }
 
 mapStateToProps = state => {
+    const localId = state.initQRCodeReducer.localId;
     const pratos = _.map(state.ListaPratosReducer, (val, uid) => {
         let desc = val.desc;
         return { desc, uid };
@@ -51,7 +52,7 @@ mapStateToProps = state => {
     const categoria = state.AppReducer.categoria;
     const prato = state.AppReducer.prato;
 
-    return { pratos, prato, categoria };
+    return { localId, pratos, prato, categoria };
 }
 
 export default connect(mapStateToProps, { pratosFetch, modificaPrato })(Pratos);

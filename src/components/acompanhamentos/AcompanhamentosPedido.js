@@ -18,13 +18,13 @@ class AcompanhamentosPedido extends Component {
     }
 
     componentWillMount() {
-        this.props.acompanhamentosPedidoFetch(this.props.pedidoAtual);
+        this.props.acompanhamentosPedidoFetch(this.props.pedidoAtual, this.props.localId);
         this.criaFonteDeDados(this.props.acompanhamentos);
     }
 
     componentWillReceiveProps(nextProps) {
         if(this.props.acompanhamentos.length != nextProps.acompanhamentos.length){
-            this.props.acompanhamentosPedidoFetch(this.props.pedidoAtual);
+            this.props.acompanhamentosPedidoFetch(this.props.pedidoAtual, this.props.localId);
         }
         this.criaFonteDeDados(nextProps.acompanhamentos);
     }
@@ -47,14 +47,15 @@ class AcompanhamentosPedido extends Component {
                 desc: this.props.acompanhamento.descricao,
                 quantidade: this.props.quantidadeAcompanhamento
             },
-            this.props.pedidoAtual);
+            this.props.pedidoAtual,
+            this.props.localId);
         } else {
             alert("Por favor, informe a Categoria, Prato, e Quantidade.");
         }
     }
 
     _removeAcompanhamento(acompanhamentoId) {
-        this.props.removeAcompanhamento(acompanhamentoId, this.props.pedidoAtual);
+        this.props.removeAcompanhamento(acompanhamentoId, this.props.pedidoAtual, this.props.localId);
     }
 
     _renderRow(item) {

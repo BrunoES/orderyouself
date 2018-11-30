@@ -18,13 +18,13 @@ class PratoPrincipal extends Component {
     }
 
     componentWillMount() {
-        this.props.refeicoesFetch(this.props.pedidoAtual);
+        this.props.refeicoesFetch(this.props.pedidoAtual, this.props.localId);
         this.criaFonteDeDados(this.props.refeicoes);
     }
 
     componentWillReceiveProps(nextProps) {
         if(this.props.refeicoes.length != nextProps.refeicoes.length){
-            this.props.refeicoesFetch(this.props.pedidoAtual);
+            this.props.refeicoesFetch(this.props.pedidoAtual, this.props.localId);
         }
         this.criaFonteDeDados(nextProps.refeicoes);
     }
@@ -47,14 +47,15 @@ class PratoPrincipal extends Component {
                 desc: this.props.prato.descricao,
                 quantidade: this.props.quantidade
             },
-            this.props.pedidoAtual);
+            this.props.pedidoAtual,
+            this.props.localId);
         } else {
             alert("Por favor, informe a Categoria, Prato, e Quantidade.");
         }
     }
 
     _removeRefeicao(refeicaoId) {
-        this.props.removeRefeicao(refeicaoId, this.props.pedidoAtual);
+        this.props.removeRefeicao(refeicaoId, this.props.pedidoAtual, this.props.localId);
     }
 
     _renderRow(item) {
