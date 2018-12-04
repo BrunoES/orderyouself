@@ -3,7 +3,7 @@ import { View, Text,  Button, StyleSheet, TouchableOpacity } from 'react-native'
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 
-import {  getCurrentOrder, setUidLocal } from '../actions/AppActions';
+import {  getCurrentOrder, setUidLocal, setNumMesa } from '../actions/AppActions';
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
 
@@ -22,11 +22,12 @@ class InitQRCode extends Component {
     */
 
     onSuccess(e) {
-        alert("Success");
+        //alert("Success");
         let data = e.data;
         // Codigo Local | Mesa
         data = "NMajCK3oEvhj2XhyCzbf2bxj73H3|1";
         this.props.setUidLocal(data.split("|")[0]);
+        this.props.setNumMesa(data.split("|")[1]);
         Actions.pratoPrincipal();
     }
 
@@ -94,4 +95,4 @@ mapStateToProps = state => {
     return { pedidoAtual };
 }
 
-export default connect(mapStateToProps, { getCurrentOrder, setUidLocal })(InitQRCode);
+export default connect(mapStateToProps, { getCurrentOrder, setUidLocal, setNumMesa })(InitQRCode);

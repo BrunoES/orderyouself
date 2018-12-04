@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Button, ListView, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { refeicoesFetch, acompanhamentosPedidoFetch, bebidasPedidoFetch, cancelaPedido, confirmaPedido, criaNovoPedido, buscaPedidoAtual, deletaPedidoAtual } from '../../actions/AppActions';
+import { refeicoesFetch, acompanhamentosPedidoFetch, bebidasPedidoFetch, cancelaPedido, confirmaPedido, criaNovoPedido, setMesaPedido, buscaPedidoAtual, deletaPedidoAtual } from '../../actions/AppActions';
 import MyListItem from './../MyListItem';
 
 class Pedido extends Component {
@@ -64,15 +64,17 @@ class Pedido extends Component {
     }
 
     _cancelaPedido() {
-        this.props.cancelaPedido(this.props.pedidoAtual);
-        this.props.deletaPedidoAtual(this.props.pedidoAtual);
-        this.props.criaNovoPedido();
+        this.props.cancelaPedido(this.props.pedidoAtual, this.props.localId);
+        this.props.deletaPedidoAtual(this.props.pedidoAtual, this.props.localId);
+        this.props.criaNovoPedido(this.props.localId);
     }
 
     _finalizaPedido() {
-        this.props.confirmaPedido(this.props.pedidoAtual);
-        this.props.deletaPedidoAtual(this.props.pedidoAtual);
-        this.props.criaNovoPedido();
+        console.log(this.props.pedidoAtual);
+        this.props.confirmaPedido(this.props.pedidoAtual, this.props.localId);
+        this.props.setMesaPedido(this.props.pedidoAtual, this.props.numMesa, this.props.localId);
+        this.props.deletaPedidoAtual(this.props.pedidoAtual, this.props.localId);
+        this.props.criaNovoPedido(this.props.localId);
     }
 
 
@@ -128,6 +130,7 @@ class Pedido extends Component {
 
 const mapStateToProps = state => {
     const localId = state.initQRCodeReducer.localId;
+    const numMesa = state.initQRCodeReducer.numMesa;
 
     const refeicoes = _.map(state.ListaRefeicoesReducer, (val, uid) => {
         return { ...val, uid }
@@ -145,7 +148,7 @@ const mapStateToProps = state => {
         return { ...val, uid }
     });
 
-    return { localId, refeicoes, acompanhamentos, bebidas, pedidoAtual };
+    return { localId, numMesa, refeicoes, acompanhamentos, bebidas, pedidoAtual };
 }
 
-export default connect(mapStateToProps, { refeicoesFetch, acompanhamentosPedidoFetch, bebidasPedidoFetch, cancelaPedido, confirmaPedido, criaNovoPedido, buscaPedidoAtual, deletaPedidoAtual })(Pedido);
+export default connect(mapStateToProps, { refeicoesFetch, acompanhamentosPedidoFetch, bebidasPedidoFetch, cancelaPedido, confirmaPedido, criaNovoPedido, setMesaPedido, buscaPedidoAtual, deletaPedidoAtual })(Pedido);

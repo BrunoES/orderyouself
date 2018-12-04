@@ -32,3 +32,6 @@ export const RECUPERA_PEDIDO_ATUAL = 'recupera_pedido_atual';
 export const REMOVE_PEDIDO_ATUAL = 'remove_pedido_atual';
 
 export const UID_LOCAL = 'uid_local';
+
+export const SET_NUM_MESA = 'set_num_mesa';
+export const SET_MESA_PEDIDO = 'set_mesa_pedido';

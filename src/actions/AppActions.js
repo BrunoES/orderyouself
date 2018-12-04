@@ -31,15 +31,18 @@ import {
     RECUPERA_PEDIDO_ATUAL,
     REMOVE_PEDIDO_ATUAL,
 
-    UID_LOCAL
+    UID_LOCAL,
+
+    SET_NUM_MESA,
+    SET_MESA_PEDIDO
 } from './types';
 
 import _ from 'lodash';
 import firebase from 'firebase';
 
 const usuarioLogado = "6abe636d-f47a-415e-9493-ac89db41361f";
-const pedido = "b68cf9a9-c745-4752-95c2-8638732a94ce";
-const localId = "NMajCK3oEvhj2XhyCzbf2bxj73H3_XXX";
+//const pedido = "b68cf9a9-c745-4752-95c2-8638732a94ce";
+const localId = "NMajCK3oEvhj2XhyCzbf2bxj73H3";
 
 export const categoriasFetch = (localId) => {
     return dispatch => {
@@ -344,7 +347,7 @@ export const getCurrentOrder = () => {
     }
 }
 
-export const criaNovoPedido = () => {
+export const criaNovoPedido = (localId) => {
     return dispatch => {
         const pedidoId = firebase.database().ref(`/pedidoAtual/${usuarioLogado}/${localId}/`).push({ 'desc': 'PedidoAtual' }).key;
         if(pedidoId !== ''){
@@ -354,6 +357,18 @@ export const criaNovoPedido = () => {
             type: CRIA_NOVO_PEDIDO,
             payload: pedidoId
         });
+    };
+}
+
+export const setMesaPedido = (pedidoAtual, numMesa, localId) => {
+    return dispatch => {
+        //firebase.database().ref(`/pedidos/${usuarioLogado}/${localId}/${pedidoAtual}/mesa`).setValue(numMesa)
+        //firebase.database().child(`/pedidos/${usuarioLogado}/${localId}/${pedidoAtual}/`).setValue(numMesa)
+        firebase.database().ref(`/pedidos/${usuarioLogado}/${localId}/${pedidoAtual}/mesa`).set(numMesa);
+        /*
+        .on("value", snapshot => {
+            dispatch({ type: SET_MESA_PEDIDO, payload: snapshot.val() });
+        })*/
     };
 }
 
@@ -369,7 +384,7 @@ export const criaNovoPedido = () => {
 }
 */
 
-export const deletaPedidoAtual = (pedidoAtual) => {
+export const deletaPedidoAtual = (pedidoAtual, localId) => {
     return dispatch => {
         firebase.database().ref(`/pedidoAtual/${usuarioLogado}/${localId}/${pedidoAtual}/`)
             .remove()
@@ -384,7 +399,7 @@ export const deletaPedidoAtual = (pedidoAtual) => {
     };
 }
 
-export const cancelaPedido = (pedidoAtual) => {
+export const cancelaPedido = (pedidoAtual, localId) => {
     return dispatch => {
         firebase.database().ref(`/pedidos/${usuarioLogado}/${localId}/${pedidoAtual}/`)
             .update({ 'status': 'canceled' })
@@ -399,7 +414,7 @@ export const cancelaPedido = (pedidoAtual) => {
     };
 }
 
-export const confirmaPedido = (pedidoAtual) => {
+export const confirmaPedido = (pedidoAtual, localId) => {
     return dispatch => {
         firebase.database().ref(`/pedidos/${usuarioLogado}/${localId}/${pedidoAtual}/`)
             .update({ 'status': 'confirmed' })
@@ -419,5 +434,12 @@ export const setUidLocal = (localId) => {
     return {
         type: UID_LOCAL,
         payload: localId
+    };
+}
+
+export const setNumMesa = (numMesa) => {
+    return {
+        type: SET_NUM_MESA,
+        payload: numMesa
     };
 }
