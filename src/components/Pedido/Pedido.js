@@ -65,7 +65,7 @@ class Pedido extends Component {
 
     _cancelaPedido() {
         this.props.cancelaPedido(this.props.pedidoAtual, this.props.localId);
-        this.props.deletaPedidoAtual(this.props.pedidoAtual, this.props.localId);
+        this.props.deletaPedidoAtual(this.props.pedidoAtual);
         this.props.criaNovoPedido(this.props.localId);
     }
 
@@ -73,7 +73,7 @@ class Pedido extends Component {
         console.log(this.props.pedidoAtual);
         this.props.confirmaPedido(this.props.pedidoAtual, this.props.localId);
         this.props.setMesaPedido(this.props.pedidoAtual, this.props.numMesa, this.props.localId);
-        this.props.deletaPedidoAtual(this.props.pedidoAtual, this.props.localId);
+        this.props.deletaPedidoAtual(this.props.pedidoAtual);
         this.props.criaNovoPedido(this.props.localId);
     }
 

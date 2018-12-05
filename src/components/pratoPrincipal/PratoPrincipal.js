@@ -126,6 +126,8 @@ mapStateToProps = state => {
         return { ...val, uid }
     });
 
+    console.log(pedidoAtual);
+
     return { localId, refeicoes, categoria, prato, quantidade, pedidoAtual };
 }
 

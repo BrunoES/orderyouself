@@ -340,16 +340,16 @@ export const buscaPedidoAtual = () => {
 */
 export const getCurrentOrder = () => {
     return dispatch => {
-        firebase.database().ref(`/pedidoAtual/${usuarioLogado}/${localId}/`)
+        firebase.database().ref(`/pedidoAtual/${usuarioLogado}/`)
             .on("value", snapshot => {
                 dispatch({ type: RECUPERA_PEDIDO_ATUAL, payload: snapshot.val() });
-            })
+            });
     }
 }
 
 export const criaNovoPedido = (localId) => {
     return dispatch => {
-        const pedidoId = firebase.database().ref(`/pedidoAtual/${usuarioLogado}/${localId}/`).push({ 'desc': 'PedidoAtual' }).key;
+        const pedidoId = firebase.database().ref(`/pedidoAtual/${usuarioLogado}/`).push({ 'desc': 'PedidoAtual' }).key;
         if(pedidoId !== ''){
             firebase.database().ref(`/pedidos/${usuarioLogado}/${localId}/`).child(pedidoId).set({ 'status': 'opened' });
         }
@@ -384,9 +384,9 @@ export const criaNovoPedido = () => {
 }
 */
 
-export const deletaPedidoAtual = (pedidoAtual, localId) => {
+export const deletaPedidoAtual = (pedidoAtual) => {
     return dispatch => {
-        firebase.database().ref(`/pedidoAtual/${usuarioLogado}/${localId}/${pedidoAtual}/`)
+        firebase.database().ref(`/pedidoAtual/${usuarioLogado}/${pedidoAtual}/`)
             .remove()
             .then(() => dispatch({
                 type: REMOVE_PEDIDO_ATUAL,

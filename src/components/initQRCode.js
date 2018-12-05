@@ -24,10 +24,14 @@ class InitQRCode extends Component {
     onSuccess(e) {
         //alert("Success");
         let data = e.data;
-        // Codigo Local | Mesa
         data = "NMajCK3oEvhj2XhyCzbf2bxj73H3|1";
-        this.props.setUidLocal(data.split("|")[0]);
-        this.props.setNumMesa(data.split("|")[1]);
+
+        // Codigo Local | Mesa
+        const localId = data.split("|")[0];
+        const numMesa = data.split("|")[1];
+
+        this.props.setUidLocal(localId);
+        this.props.setNumMesa(numMesa);
         Actions.pratoPrincipal();
     }
 
