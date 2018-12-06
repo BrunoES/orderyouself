@@ -45,7 +45,8 @@ class BebidasPedido extends Component {
                 bebidaId: this.props.bebida.id,
                 bebida: this.props.bebida.descricao,
                 desc: this.props.bebida.descricao,
-                quantidade: this.props.quantidadeBebida
+                quantidade: this.props.quantidadeBebida,
+                numMesa: this.props.numMesa
             },
             this.props.pedidoAtual,
             this.props.localId);
@@ -114,6 +115,7 @@ class BebidasPedido extends Component {
 
 mapStateToProps = state => {
     const localId = state.initQRCodeReducer.localId;
+    const numMesa = state.initQRCodeReducer.numMesa;
     const categoriaBebidas = state.AppReducer.categoriaBebidas;
     const bebida = state.AppReducer.bebida;
     const quantidadeBebida = state.AppReducer.quantidadeBebida;
@@ -126,7 +128,7 @@ mapStateToProps = state => {
         return { ...val, uid }
     });
     
-    return { localId, bebidas, categoriaBebidas, bebida, quantidadeBebida, pedidoAtual };
+    return { localId, numMesa, bebidas, categoriaBebidas, bebida, quantidadeBebida, pedidoAtual };
 }
 
 export default connect(mapStateToProps, { modificaQuantidadeBebida, adicionaBebida, removeBebida, bebidasPedidoFetch })(BebidasPedido);

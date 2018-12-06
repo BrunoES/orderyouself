@@ -45,7 +45,8 @@ class AcompanhamentosPedido extends Component {
                 acompanhamentoId: this.props.acompanhamento.id,
                 acompanhamento: this.props.acompanhamento.descricao,
                 desc: this.props.acompanhamento.descricao,
-                quantidade: this.props.quantidadeAcompanhamento
+                quantidade: this.props.quantidadeAcompanhamento,
+                numMesa: this.props.numMesa
             },
             this.props.pedidoAtual,
             this.props.localId);
@@ -115,6 +116,7 @@ class AcompanhamentosPedido extends Component {
 
 mapStateToProps = state => {
     const localId = state.initQRCodeReducer.localId;
+    const numMesa = state.initQRCodeReducer.numMesa;
     const categoriaAcompanhamentos = state.AppReducer.categoriaAcompanhamentos;
     const acompanhamento = state.AppReducer.acompanhamento;
     const quantidadeAcompanhamento = state.AppReducer.quantidadeAcompanhamento;
@@ -127,7 +129,7 @@ mapStateToProps = state => {
         return { ...val, uid }
     });
     
-    return { localId, acompanhamentos, categoriaAcompanhamentos, acompanhamento, quantidadeAcompanhamento, pedidoAtual };
+    return { localId, numMesa, acompanhamentos, categoriaAcompanhamentos, acompanhamento, quantidadeAcompanhamento, pedidoAtual };
 }
 
 export default connect(mapStateToProps, { modificaQuantidadeAcompanhamento, adicionaAcompanhamento, removeAcompanhamento, acompanhamentosPedidoFetch })(AcompanhamentosPedido);
