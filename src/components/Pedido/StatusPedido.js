@@ -2,19 +2,14 @@ import React, { Component } from 'react';
 import { View, Text, Button, ListView, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { refeicoesFetch, acompanhamentosPedidoFetch, bebidasPedidoFetch, cancelaPedido, confirmaPedido, criaNovoPedido, setMesaPedido, buscaPedidoAtual, deletaPedidoAtual } from '../../actions/AppActions';
+import { refeicoesFetch, acompanhamentosPedidoFetch, bebidasPedidoFetch, cancelaPedido } from '../../actions/AppActions';
 import MyListItem from './../MyListItem';
 
 import { Actions } from 'react-native-router-flux';
 
-class Pedido extends Component {
+class StatusPedido extends Component {
     
     componentWillMount() {
-       /*
-       this.props.refeicoesFetch();
-       this.props.acompanhamentosPedidoFetch();
-       this.props.bebidasPedidoFetch();
-       */
        this.buildDataSourceRefeicoes(this.props.refeicoes);
        this.buildDataSourceAcompanhamentos(this.props.acompanhamentos);
        this.buildDataSourceBebidas(this.props.bebidas);
@@ -66,22 +61,8 @@ class Pedido extends Component {
     }
 
     _cancelaPedido() {
-        this.props.cancelaPedido(this.props.pedidoAtual, this.props.localId);
-        this.props.deletaPedidoAtual(this.props.pedidoAtual);
-        this.props.criaNovoPedido(this.props.localId);
+        //this.props.cancelaPedido(this.props.pedidoAtual, this.props.localId);
     }
-
-    _finalizaPedido() {
-        console.log(this.props.pedidoAtual);
-        /*
-        this.props.confirmaPedido(this.props.pedidoAtual, this.props.localId);
-        this.props.setMesaPedido(this.props.pedidoAtual, this.props.numMesa, this.props.localId);
-        this.props.deletaPedidoAtual(this.props.pedidoAtual);
-        this.props.criaNovoPedido(this.props.localId);
-        */
-        Actions.statusPedido();
-    }
-
 
     render() {
         return (
@@ -121,10 +102,10 @@ class Pedido extends Component {
                     </View>
                     <View style={{ flex: 0.5, marginTop: 7, marginRight: 5, marginLeft: 5 }}>
                         <Button
-                            onPress={() => this._finalizaPedido()}
-                            title="Confirmar"
+                            onPress={() => Actions.pratoPrincipal()}
+                            title="Voltar"
                             color="#841584"
-                            accessibilityLabel="Confirmar Pedido."
+                            accessibilityLabel="Voltar"
                         />
                     </View>
                 </View>
@@ -156,4 +137,4 @@ const mapStateToProps = state => {
     return { localId, numMesa, refeicoes, acompanhamentos, bebidas, pedidoAtual };
 }
 
-export default connect(mapStateToProps, { refeicoesFetch, acompanhamentosPedidoFetch, bebidasPedidoFetch, cancelaPedido, confirmaPedido, criaNovoPedido, setMesaPedido, buscaPedidoAtual, deletaPedidoAtual })(Pedido);
+export default connect(mapStateToProps, { refeicoesFetch, acompanhamentosPedidoFetch, bebidasPedidoFetch, cancelaPedido })(StatusPedido);

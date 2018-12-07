@@ -11,6 +11,7 @@ import PratoPrincipal from './components/pratoPrincipal/PratoPrincipal';
 import BebidasPedido from './components/bebidas/BebidasPedido';
 import AcompanhamentosPedido from './components/acompanhamentos/AcompanhamentosPedido';
 import Pedido from './components/Pedido/Pedido';
+import StatusPedido from './components/Pedido/StatusPedido';
 
 export default props => (
     <Router navigationBarStyle={{ backgroundColor: '#f46e41'}} titleStyle={{ color: '#ffffff' }} >
@@ -22,6 +23,7 @@ export default props => (
             <Scene key='bebidasPedido' component={BebidasPedido} title="Bebidas Pedido"  />
             <Scene key='acompanhamentosPedido' component={AcompanhamentosPedido} title="Acompanhamentos" />
             <Scene key='finalizar' component={Pedido} title="Finalizar Pedido" />
+            <Scene key='statusPedido' component={StatusPedido} title="Status do Pedido" />
             <Scene key='menu' component={Menu} title="Menu" />
         </Scene>
     </Router>
