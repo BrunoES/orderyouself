@@ -15,6 +15,7 @@ import ListaCategoriasBebidasReducer from './ListaCategoriasBebidasReducer';
 import ListaCategoriasAcompanhamentosReducer from './ListaCategoriasAcompanhamentosReducer';
 
 import PedidoReducer from './PedidoReducer';
+import MeusPedidosReducer from './MeusPedidosReducer';
 
 import initQRCodeReducer from '../components/initQRCodeReducer';
 
@@ -35,6 +36,7 @@ export default combineReducers({
     ListaCategoriasAcompanhamentosReducer,
 
     PedidoReducer,
+    MeusPedidosReducer,
 
     initQRCodeReducer
 });

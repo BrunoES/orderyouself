@@ -30,6 +30,7 @@ import {
     CRIA_NOVO_PEDIDO,
     RECUPERA_PEDIDO_ATUAL,
     REMOVE_PEDIDO_ATUAL,
+    MEUS_PEDIDOS_FETCH,
 
     UID_LOCAL,
 
@@ -428,6 +429,16 @@ export const confirmaPedido = (pedidoAtual, localId) => {
             }))
     };
 }
+
+export const meusPedidosFetch = (localId) => {
+    return dispatch => {
+        firebase.database().ref(`/pedidos/${usuarioLogado}/${localId}/`)
+            .on("value", snapshot => {
+                dispatch({ type: MEUS_PEDIDOS_FETCH, payload: snapshot.val() });
+            })
+    }
+}
+
 
 /* --------------------------------------------------------------------------------------------------- */
 export const setUidLocal = (localId) => {

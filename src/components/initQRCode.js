@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { View, Text,  Button, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text,  Button, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 
-import {  getCurrentOrder, setUidLocal, setNumMesa } from '../actions/AppActions';
+import {  getCurrentOrder, meusPedidosFetch, setUidLocal, setNumMesa } from '../actions/AppActions';
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
 
 import _ from 'lodash';
+
+import SideBarMenu from './menu/sidebarmenu';
 
 class InitQRCode extends Component {
 
@@ -20,25 +22,52 @@ class InitQRCode extends Component {
           .catch(err => console.error('An error occured', err));
     }
     */
-
+/*
     onSuccess(e) {
         //alert("Success");
         let data = e.data;
-        data = "NMajCK3oEvhj2XhyCzbf2bxj73H3|1";
+        //data = "NMajCK3oEvhj2XhyCzbf2bxj73H3|1";
+
+        Alert.alert(
+            'Alert Title',
+            e.data,
+            [
+              {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+            ],
+            { cancelable: false }
+        );
 
         // Codigo Local | Mesa
+
         const localId = data.split("|")[0];
         const numMesa = data.split("|")[1];
 
         this.props.setUidLocal(localId);
         this.props.setNumMesa(numMesa);
         Actions.pratoPrincipal();
+    }*/
+    
+    onSuccess(e) {
+        //alert("Success");
+        let data = e.data;
+        data = "NMajCK3oEvhj2XhyCzbf2bxj73H3|1";
+
+        const localId = data.split("|")[0];
+        const numMesa = data.split("|")[1];
+
+        this.props.meusPedidosFetch(localId);
+        
+        this.props.setUidLocal(localId);
+        this.props.setNumMesa(numMesa);
+        
+        //Actions.pratoPrincipal();
+
+        Actions.meusPedidos();
     }
 
     constructor(props){
         super(props);
     }
-
 
     componentWillMount(){
         this.props.getCurrentOrder();
@@ -99,4 +128,4 @@ mapStateToProps = state => {
     return { pedidoAtual };
 }
 
-export default connect(mapStateToProps, { getCurrentOrder, setUidLocal, setNumMesa })(InitQRCode);
+export default connect(mapStateToProps, { getCurrentOrder, meusPedidosFetch, setUidLocal, setNumMesa })(InitQRCode);

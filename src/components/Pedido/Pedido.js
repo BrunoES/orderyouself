@@ -72,13 +72,10 @@ class Pedido extends Component {
     }
 
     _finalizaPedido() {
-        console.log(this.props.pedidoAtual);
-        /*
         this.props.confirmaPedido(this.props.pedidoAtual, this.props.localId);
         this.props.setMesaPedido(this.props.pedidoAtual, this.props.numMesa, this.props.localId);
         this.props.deletaPedidoAtual(this.props.pedidoAtual);
         this.props.criaNovoPedido(this.props.localId);
-        */
         Actions.statusPedido();
     }
 

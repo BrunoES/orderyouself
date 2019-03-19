@@ -11,6 +11,7 @@ import PratoPrincipal from './components/pratoPrincipal/PratoPrincipal';
 import BebidasPedido from './components/bebidas/BebidasPedido';
 import AcompanhamentosPedido from './components/acompanhamentos/AcompanhamentosPedido';
 import Pedido from './components/Pedido/Pedido';
+import MeusPedidos from './components/Pedido/MeusPedidos';
 import StatusPedido from './components/Pedido/StatusPedido';
 
 export default props => (
@@ -24,6 +25,7 @@ export default props => (
             <Scene key='acompanhamentosPedido' component={AcompanhamentosPedido} title="Acompanhamentos" />
             <Scene key='finalizar' component={Pedido} title="Finalizar Pedido" />
             <Scene key='statusPedido' component={StatusPedido} title="Status do Pedido" />
+            <Scene key='meusPedidos' component={MeusPedidos} title="Meus Pedidos" />
             <Scene key='menu' component={Menu} title="Menu" />
         </Scene>
     </Router>
