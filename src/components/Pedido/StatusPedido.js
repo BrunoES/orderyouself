@@ -15,6 +15,12 @@ class StatusPedido extends Component {
        this.buildDataSourceBebidas(this.props.bebidas);
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.buildDataSourceRefeicoes(nextProps.refeicoes);
+        this.buildDataSourceAcompanhamentos(nextProps.acompanhamentos);
+        this.buildDataSourceBebidas(nextProps.bebidas);
+    }
+
     buildDataSourceRefeicoes(data) {
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.dataSourceRefeicoes = ds.cloneWithRows(data);

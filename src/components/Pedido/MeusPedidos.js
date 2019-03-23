@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Button, ListView, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { meusPedidosFetch } from '../../actions/AppActions';
+import { meusPedidosFetch, acompanhamentosPedidoFetch, bebidasPedidoFetch, refeicoesFetch } from '../../actions/AppActions';
 import MyListItemPedido from '../MyListItemPedido';
 import { getDescStatus } from '../../utils/objutils';
 
@@ -23,10 +23,19 @@ class MeusPedidos extends Component {
         this.dataSourcePedidos = ds.cloneWithRows(data);
     }
 
+    carregaDadosPedido(pedidoId) {
+        console.log(pedidoId);
+        this.props.acompanhamentosPedidoFetch(pedidoId, this.props.localId);
+        this.props.bebidasPedidoFetch(pedidoId, this.props.localId);
+        this.props.refeicoesFetch(pedidoId, this.props.localId);
+        Actions.statusPedido();
+    }
+
     _renderRowPedido(item) {
+        console.log(item);
         return (
             <View>
-                <TouchableHighlight onPress={ () => Actions.statusPedido() } >
+                <TouchableHighlight onPress={ () => this.carregaDadosPedido(item.uid) } >
                     <MyListItemPedido mesa={item.mesa} estado={getDescStatus(item.status)} />
                 </TouchableHighlight>
             </View>
@@ -42,7 +51,15 @@ class MeusPedidos extends Component {
                         style={{ marginBottom: 5, marginTop: 5 }}
                         enableEmptySections
                         dataSource={this.dataSourcePedidos}
-                        renderRow={this._renderRowPedido}
+                        renderRow={(item) => {
+                            return (
+                                <View>
+                                    <TouchableHighlight onPress={ () => this.carregaDadosPedido(item.uid) } >
+                                        <MyListItemPedido mesa={item.mesa} estado={getDescStatus(item.status)} />
+                                    </TouchableHighlight>
+                                </View>
+                            );
+                        }}
                     />
                 </View>
                 <View style={{ flex: 0.1, marginTop: 1, flexDirection: 'row' }}>
@@ -70,4 +87,4 @@ const mapStateToProps = state => {
     return { localId, meusPedidos };
 }
 
-export default connect(mapStateToProps, { meusPedidosFetch })(MeusPedidos);
+export default connect(mapStateToProps, { meusPedidosFetch, acompanhamentosPedidoFetch, bebidasPedidoFetch, refeicoesFetch })(MeusPedidos);
